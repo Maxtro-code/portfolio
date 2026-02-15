@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Mathis COCO</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        header {
+          position: fixed;
+          top: 0;
+          width: 100%;
+          z-index: 1000;
+          background-color: rgba(255, 255, 255, 0.85); /* Transparence */
+          backdrop-filter: blur(8px); /* Flou arrière-plan */
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optionnel : ombre douce */
+        }
+      
+        body {
+          padding-top: 70px; /* pour ne pas que le header cache le contenu */
+        }
+      
+        .nav-link {
+          color: #333;
+        }
+      
+        .nav-link:hover {
+          color: #007bff;
+        }
+    </style>
+    
+    <header class="border-bottom py-2">
+    <div class="container-fluid">
+      <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <!-- Titre à gauche -->
+        <div class="d-flex align-items-center">
+          <h5 class="mb-0">Portfolio de Mathis COCO</h5>
+        </div>
+        
+        <!-- Navigation + bouton CV à droite -->
+        <div class="d-flex align-items-center">
+          <nav>
+            <ul class="nav mb-0">
+              <li class="nav-item">
+                <a href="#accueil" class="nav-link px-2">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a href="#Tableau de synthèse" class="nav-link px-2">Tableau de synthèse</a>
+              </li>
+              <li class="nav-item">
+                <a href="#formation" class="nav-link px-2">Formation</a>
+              </li>
+              <li class="nav-item">
+                <a href="#competences" class="nav-link px-2">Compétences</a>
+              </li>
+              <li class="nav-item">
+                <a href="#stages" class="nav-link px-2">Stages</a>
+              </li>
+              <li class="nav-item">
+                <a href="#projets" class="nav-link px-2">Projets</a>
+              </li>
+              <li class="nav-item">
+                <a href="#veille" class="nav-link px-2">Veille</a>
+              </li>
+              <li class="nav-item">
+                <a href="#contact" class="nav-link px-2">Contact</a>
+              </li>
+            </ul>
+          </nav>
+          <a href="cv/Curriculum Vitae (CV)_sans adresse_Mathis Coco.pdf" 
+             class="btn btn-sm btn-primary ms-3" download>
+            Télécharger CV
+          </a>
+        </div>
+      </div>
+    </div>
+    </header>
+
+      
+      
+
+    <section id="accueil">
+        <h2>Je m'appelle Mathis Coco</h2>
+        <p>Bienvenue sur mon Portfolio</p>
+        <section id="aboutme"> 
+            <h2>À propos de moi</h2>
+            <p>Je suis actuellement étudiant à l'École nationale de commerce à Paris 17<sup>éme</sup>, en deuxième année de BTS SIO (Services Informatiques aux Organisations) avec l'option SLAM (Solutions Logicielles et Applications Métiers).</p>
+            <h2>Objectif professionnel</h2>
+            <p>Mon objectif est de travailler dans le développement d'applications destinées aux jeux vidéo. J'ai découvert ma passion pour ce domaine en programmant des jeux sur Scratch avec un ami.</p>
+        </section>
+    </section>
+
+    <section id="Tableau de synthèse">
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Tableau de synthèse
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body" style="width: 750px; height: 600px">
+                    <embed src="Mathis Coco - BTS SIO - Annexe 8-1 - Tableau de synthèse - Epreuve E4 - BTS SIO 2024.pdf" type="application/pdf" width="100%" height="100%">
+                </div>
+              </div>
+            </div>
+    </section>
+
+    <section id="formation">
+        <h2>Formation</h2>
+        <figure>
+            <blockquote class="blockquote">
+              <p>BTS SIO - Ecole nationale de commerce (Paris 17<sup>éme</sup>)</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+              Statut :  <cite title="Source Title">en cours de formation <br> Septembre 2023 - Juin 2025 (2 ans)</cite>
+            </figcaption>
+        </figure>
+        <p>Le BTS Services Informatiques aux Organisations (SIO) est un diplôme de niveau Bac+2, qui forme les étudiants aux métiers de l'informatique. Il propose une formation pratique et théorique dans plusieurs domaines clés de l'informatique, comme la gestion des systèmes d'information, la programmation, la création d'applications, ainsi que la gestion des bases de données.</p>
+        <p>Le BTS SIO propose deux options :</p>
+        <ul>
+            <li><strong>Solutions Logicielles et Applications Métiers (SLAM)</strong> : Cette option est orientée vers le développement d'applications et de solutions logicielles, ainsi que la gestion de projets informatiques. Elle permet de maîtriser des langages comme Java, PHP, ou SQL.</li>
+            <li><strong>Administration des Réseaux et des Systèmes (SISR)</strong> : Cette option se concentre sur la gestion des infrastructures réseaux et systèmes informatiques.</li>
+        </ul>
+        <figure>
+            <blockquote class="blockquote">
+              <p>Baccalauréat scientifique - Lycée Léon Blum (Créteil)</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+              Statut :  <cite title="Source Title">formation terminée <br> Septembre 2021 - Juin 2023 (3 ans)</cite>
+            </figcaption>
+        </figure>
+        <p>J'ai obtenu mon Baccalauréat au Lycée Léon Blum de Créteil avec une spécialisation en Mathématiques et Physique-Chimie.</p>
+        <ul>
+            <li><strong>Spécialité Mathématiques</strong></li>
+            <li><strong>Spécialité Physique-Chimie</strong></li>
+        </ul>
+    </section>
+    
+    <section id="competences">
+        <h2>Compétences & Certifications</h2>
+        <ul>
+            <li>Développement web (HTML, CSS, JavaScript)</li>
+            <li>Programmation en Java, PHP</li>
+            <li>Gestion de bases de données (SQL, MySQL)</li>
+            <li>Utilisation de Git & GitHub</li>
+        </ul>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Développement informatique</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">CyberSécurité</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Architecture réseaux</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false">Pix</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0"></div>
+            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><h6>MOOC de l'Anssi - Janvier 2024</h6> Initier à la cybersécurité, approfondir vos connaissances, et agir efficacement sur la protection de vos outils numériques.
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">Voir la certification</button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    <img src="certifications/Anssi/MOOC de l’ANSSI.jpg" class="rounded mx-auto d-block" alt="MOOC de l'Anssi" width="400"> Référentiel : www.secnumacademie.gouv.fr
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0"></div>
+            <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0"></div>
+        </div>
+    </section>
+
+    <section id="stages">
+        <h2>Stages</h2>
+        <p>Présentation des expériences professionnelles effectuées en entreprise.</p>
+
+        <h4>BNP Paribas</h4>
+        <p>
+          Stagiaire - Juin 2024 & Janvier à Mars 2025 (durée : cinq semaines & six semaines)<br><br>
+          Mission n°1 : Participation au projet CLUSTER V360 : Mise en place d'une passerelle de communication entre machines.<br>
+          Mission n°2 : Acquisition de compétences sur les architectures distribuées et les enjeux de performance dans les environnements critiques.<br>
+          Mission n°3 : Gestion des incidents techniques via le système de ticketing : Analyse, documentation et résolution des problèmes pour l'équipe MIDDELWARE.<br>
+          Mission n°4 : Transposition graphique de code JSON pour des processus internes, en utilisant des compétences en développement front-end.
+        </p>
+        
+        <!-- BOUTON -->
+        <p>
+          <button id="toggleBtn" class="btn btn-outline-secondary">
+            Afficher le Rapport de Stage
+          </button>
+        </p>
+        
+        <!-- CONTENEUR PDF -->
+        <div id="pdfContainer" style="display: none; border: 1px solid #ccc; padding: 10px; border-radius: 8px;">
+          <iframe src="Rapport de stage/Rapport de stage_BNP Paribas_Valmy 2_nov 2024 - Mathis Coco.pdf" width="100%" height="500px" style="border: none;"></iframe>
+        </div>
+        
+        <!-- SCRIPT POUR GÉRER L'AFFICHAGE -->
+        <script>
+          const toggleBtn = document.getElementById('toggleBtn');
+          const pdfContainer = document.getElementById('pdfContainer');
+        
+          toggleBtn.addEventListener('click', function () {
+            if (pdfContainer.style.display === 'none') {
+              pdfContainer.style.display = 'block';
+              toggleBtn.textContent = 'Masquer le Rapport de Stage';
+            } else {
+              pdfContainer.style.display = 'none';
+              toggleBtn.textContent = 'Afficher le Rapport de Stage';
+            }
+          });
+        </script>
+
+        <h4>Nokia</h4>
+        <p>Stagiaire - Décembre 2019 (durée : une semaine)<br><br>Stage de découverte au sein de Nokia, où j'ai eu l'opportunité d'explorer différents aspects de l'entreprise, notamment les technologies mobiles et les processus internes. J'ai participé à des activités d'observation et de support, en découvrant les défis techniques et les innovations dans le domaine des télécommunications.</p>
+        <ul>
+            <li>Ingénieur en télécommunication</li>
+            <li>Ingénieur en télécommunication spécialisé en Cyber Sécurité</li>
+            <li>Ingénieur en recherche sécurité pour les réseaux télécoms</li>
+            <li>Ingénieur intégrateur et de validation</li>
+            <li>Manager</li>
+        </ul>
+    </section>
+
+    <section id="projets">
+        <h2>Projets</h2>
+        <br>
+        <h5>Projets Scolaires :</h5>
+            <div class="accordion" id="accordionExample">
+                <!-- Le Nombre Mystérieux -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Le Nombre Mystérieux
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+
+                        <div id="carouselExampleFade" class="carousel slide carousel-fade">
+                            <div class="carousel-inner">
+                                <!-- Item 1 -->
+                                <div class="carousel-item active">
+                                    <p>Image : Jeu d'essai - Gagné</p>
+                                    <img src="projects/Professionnel/BTS SIO/Jeu d'essais - Gagné _Le nombre mystère.gif" class="d-block w-100" alt="Jeu d'essai - Gagné">
+                                </div>
+                                <!-- Item 2 -->
+                                <div class="carousel-item">
+                                    <p>Image : Jeu d'essai - Perdue</p>
+                                    <img src="projects/Professionnel/BTS SIO/Jeu d'essais - Perdue _Le nombre mystère.gif" class="d-block w-100" alt="Jeu d'essai - Perdue">              
+                                </div>
+                            </div>
+                            <!-- Carrousel controls -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+
+                        <!-- Description -->
+                        <p>Techno. utilisée : langage Java sous Eclipse IDE <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD6ElEQVR4AWIYUgDQezlAuZJEYbjX1sF6012V5+pkzo5tPSPdz7Zt2+7O2n7Gwdp6tm0b6QzvuzXsyXgmmTrni+v+fyn3Fnxc9zn3cppoaFI3l2aJgKnscd+Lvv/6026n1MfQpR9Q+I+7y6xtGwc0jpMlZTYj6kZGlE3IcSYp+/D5d5koy/FzJYCqL1RPeKrwqOEkvVD4HHL48pI6iYw6hqHIJQQqwF2ZKu/ZLA5aafF7S8krhk7+QWFw6dKyZHuTphjwFAJVwIWzMj42NvbRComnLyd+KHwayXZpZCROZ28MkoFANfmp3GUxllELCl/KHbk4HKd8Ke/sRXaUagIWv/mUoYtbubhbF1fhtI3knXzAL6qgPiJ4NrdOFnJx5EyX6ORo/GE6Aj5iYtGp14mIwm4E7mtif5mq230ozkmziyopNKCJH+SOXjwbyVq08614HtTxaeF516VruWsvzeVrhEANYNgs7V/io4/n4py0je2b379nHKgpzpy5kCKg8GwEENeBHXsSPX906+adYzdu3D7hDTxjHz96bpyA0742z8AxmTq6e06VjbbxGp6xMX+swRkQ/841QP759IONg9au+u0PMx+/u/7UR+9uOO0NVnz94+Yisd/b8IGA4psQwEz3IwBMhZptG7mBXxHAlLujWeKQgY0SBp0x0yxxdHqzpLEZ3qBJ4rCL5tipMQP5Ekif5s3Aheapw1p2aj3pgJnO6oxbndWZhjfopE46bI7dQRmvC26NDOIGkKyMM79EQc22Wfl/w9kIGO+wLh+9u+5359KV2/LRl6zYvmjOiqsLZ624UR2WL1qx1xQXWbV1x459fgJvfP3zZmEFI4qOgJmAut0hym9klQlt0J/H8eQ/czLqmZcLMrROwfElFSCh8kCIeXtspYn0GwEybV1SLnAU1gIrhUfQwD4EeGJikuMdzw4yUSFcHgJxAZMqCo5+FNitbUsb/UNF6wFNSsndC2LG6Tn1ExlxHC6hIwTW6w3x/pMgMXBaqSQETIVQNhBYCSNH7jCrWqvkkswpTclPy2NbxAXgjy+UZEKmKhrpBZH2ERDnPwEFJxeMOKRBP7DRtqXWAUxSU0svxUF4CA18m2fi7x5RKcHY6QQCXuAeGm9cqrh5P7id4gJuAtm8qE1kHez8V/XEHWcw0QUKlWmGRjriLFzlNeKNZbQRBhmAwa5UUjwT0evWbfZcFa9l9AU8orPQyF1Dkz7fOoEFYwodyqj6Wxl3hWxGlf386iZb274leKPBgleecTnFVjgbn7k04kRD3f8fZfe3WdUAmSpNGlClmyyqLdFYZE6Z5evG68hb71heAid7trqxHgCCqoyIhdxpdQAAAABJRU5ErkJggg==" alt="Icone Eclipse"></p>
+                        <p>Un jeu Java pour deux joueurs doit être développé. Le premier joueur choisit un nombre secret entre 1 et 100, et le second dispose de 10 essais pour le deviner. Après chaque proposition, le programme indique si le nombre est « Trop haut ! », « Trop bas ! » ou « Gagné ». En cas de réussite, le nombre de tentatives utilisées est affiché. Le jeu doit comporter des contrôles tout au long de la partie, des messages clairs, une présentation soignée, un code bien commenté et des noms de variables clairs et bien choisis.</p>
+                        <a href="projects/Professionnel/BTS SIO/D.M. d'Algo. - Programmation_Le nombre mystérieux.pdf" class="btn btn-primary" download>Télécharger la documentation</a>
+                    </div>
+                  </div>
+                </div>
+              
+                <!-- Le mot à trouver & La calculatrice -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Le  mot à trouver & La calculatrice
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      
+                        <div id="carouselExampleFade2" class="carousel slide carousel-fade">
+                            <div class="carousel-inner">
+                                <!-- Item 1 -->
+                                <div class="carousel-item active">
+                                    <p>Image : Jeu d'essai - Le  mot à trouver</p>
+                                    <img src="projects/Professionnel/BTS SIO/Jeu d'essai _Le mot à trouver .png" class="d-block w-100" alt="Jeu d'essai - Le mot à trouver">
+                                    <p>Techno. utilisée : langage Java sous Eclipse IDE  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD6ElEQVR4AWIYUgDQezlAuZJEYbjX1sF6012V5+pkzo5tPSPdz7Zt2+7O2n7Gwdp6tm0b6QzvuzXsyXgmmTrni+v+fyn3Fnxc9zn3cppoaFI3l2aJgKnscd+Lvv/6026n1MfQpR9Q+I+7y6xtGwc0jpMlZTYj6kZGlE3IcSYp+/D5d5koy/FzJYCqL1RPeKrwqOEkvVD4HHL48pI6iYw6hqHIJQQqwF2ZKu/ZLA5aafF7S8krhk7+QWFw6dKyZHuTphjwFAJVwIWzMj42NvbRComnLyd+KHwayXZpZCROZ28MkoFANfmp3GUxllELCl/KHbk4HKd8Ke/sRXaUagIWv/mUoYtbubhbF1fhtI3knXzAL6qgPiJ4NrdOFnJx5EyX6ORo/GE6Aj5iYtGp14mIwm4E7mtif5mq230ozkmziyopNKCJH+SOXjwbyVq08614HtTxaeF516VruWsvzeVrhEANYNgs7V/io4/n4py0je2b379nHKgpzpy5kCKg8GwEENeBHXsSPX906+adYzdu3D7hDTxjHz96bpyA0742z8AxmTq6e06VjbbxGp6xMX+swRkQ/841QP759IONg9au+u0PMx+/u/7UR+9uOO0NVnz94+Yisd/b8IGA4psQwEz3IwBMhZptG7mBXxHAlLujWeKQgY0SBp0x0yxxdHqzpLEZ3qBJ4rCL5tipMQP5Ekif5s3Aheapw1p2aj3pgJnO6oxbndWZhjfopE46bI7dQRmvC26NDOIGkKyMM79EQc22Wfl/w9kIGO+wLh+9u+5359KV2/LRl6zYvmjOiqsLZ624UR2WL1qx1xQXWbV1x459fgJvfP3zZmEFI4qOgJmAut0hym9klQlt0J/H8eQ/czLqmZcLMrROwfElFSCh8kCIeXtspYn0GwEybV1SLnAU1gIrhUfQwD4EeGJikuMdzw4yUSFcHgJxAZMqCo5+FNitbUsb/UNF6wFNSsndC2LG6Tn1ExlxHC6hIwTW6w3x/pMgMXBaqSQETIVQNhBYCSNH7jCrWqvkkswpTclPy2NbxAXgjy+UZEKmKhrpBZH2ERDnPwEFJxeMOKRBP7DRtqXWAUxSU0svxUF4CA18m2fi7x5RKcHY6QQCXuAeGm9cqrh5P7id4gJuAtm8qE1kHez8V/XEHWcw0QUKlWmGRjriLFzlNeKNZbQRBhmAwa5UUjwT0evWbfZcFa9l9AU8orPQyF1Dkz7fOoEFYwodyqj6Wxl3hWxGlf386iZb274leKPBgleecTnFVjgbn7k04kRD3f8fZfe3WdUAmSpNGlClmyyqLdFYZE6Z5evG68hb71heAid7trqxHgCCqoyIhdxpdQAAAABJRU5ErkJggg==" alt="Icone Eclipse"></p>
+                                    <!-- Description -->
+                                    <p>
+                                        L’objectif de ce devoir est de développer en Java un jeu dans lequel un joueur doit deviner un mot saisi par un autre utilisateur, en un nombre limité d’essais, en obtenant des indications sur les lettres communes et bien placées à chaque tentative.
+                                    </p>
+                                </div>
+                                <!-- Item 2 -->
+                                <div class="carousel-item">
+                                    <p>Image : Calculatrice</p>
+                                    <img src="projects/Professionnel/BTS SIO/Test-calculatrice.gif" class="d-block w-100" alt="Calculatrice">
+                                    <p>Techno. utilisée : HTML,CSS et JavaScript</p>
+                                    <!-- Description -->
+                                    <p>
+                                        L'objectif de ce projet est de développer une calculatrice graphique en JavaScript permettant d'effectuer des opérations mathématiques en cascade sur des entiers avec une interface simple et intuitive.
+                                    </p>              
+                                </div>
+                            </div>
+                            <!-- Carrousel controls -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade2" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade2" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+
+                        <a href="projects/Professionnel/BTS SIO/D.M. d'Algo. - Programmation_Le nombre mystérieux.pdf" class="btn btn-primary" download>Télécharger la documentation</a>
+                    </div>
+                  </div>
+                </div>
+              
+                <!-- Distance intervilles, Tri parssélection & propagation -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Distance intervilles, Tri pars sélection & propagation
+                    </button>
+                  </h2>
+                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      
+                        <div id="carouselExampleFade3" class="carousel slide carousel-fade">
+                            <div class="carousel-inner">
+                                <!-- Item 1 -->
+                                <div class="carousel-item active">
+                                    <p>Image : Jeu d'essai - Distance intervilles</p>
+                                    <img src="projects/Professionnel/BTS SIO/Jeu d'essai - Distance Intervilles.png" class="d-block w-100" alt="Jeu d'essai - Distance intervilles">
+                                    <p>Techno. utilisée : langage Java sous Eclipse IDE  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD6ElEQVR4AWIYUgDQezlAuZJEYbjX1sF6012V5+pkzo5tPSPdz7Zt2+7O2n7Gwdp6tm0b6QzvuzXsyXgmmTrni+v+fyn3Fnxc9zn3cppoaFI3l2aJgKnscd+Lvv/6026n1MfQpR9Q+I+7y6xtGwc0jpMlZTYj6kZGlE3IcSYp+/D5d5koy/FzJYCqL1RPeKrwqOEkvVD4HHL48pI6iYw6hqHIJQQqwF2ZKu/ZLA5aafF7S8krhk7+QWFw6dKyZHuTphjwFAJVwIWzMj42NvbRComnLyd+KHwayXZpZCROZ28MkoFANfmp3GUxllELCl/KHbk4HKd8Ke/sRXaUagIWv/mUoYtbubhbF1fhtI3knXzAL6qgPiJ4NrdOFnJx5EyX6ORo/GE6Aj5iYtGp14mIwm4E7mtif5mq230ozkmziyopNKCJH+SOXjwbyVq08614HtTxaeF516VruWsvzeVrhEANYNgs7V/io4/n4py0je2b379nHKgpzpy5kCKg8GwEENeBHXsSPX906+adYzdu3D7hDTxjHz96bpyA0742z8AxmTq6e06VjbbxGp6xMX+swRkQ/841QP759IONg9au+u0PMx+/u/7UR+9uOO0NVnz94+Yisd/b8IGA4psQwEz3IwBMhZptG7mBXxHAlLujWeKQgY0SBp0x0yxxdHqzpLEZ3qBJ4rCL5tipMQP5Ekif5s3Aheapw1p2aj3pgJnO6oxbndWZhjfopE46bI7dQRmvC26NDOIGkKyMM79EQc22Wfl/w9kIGO+wLh+9u+5359KV2/LRl6zYvmjOiqsLZ624UR2WL1qx1xQXWbV1x459fgJvfP3zZmEFI4qOgJmAut0hym9klQlt0J/H8eQ/czLqmZcLMrROwfElFSCh8kCIeXtspYn0GwEybV1SLnAU1gIrhUfQwD4EeGJikuMdzw4yUSFcHgJxAZMqCo5+FNitbUsb/UNF6wFNSsndC2LG6Tn1ExlxHC6hIwTW6w3x/pMgMXBaqSQETIVQNhBYCSNH7jCrWqvkkswpTclPy2NbxAXgjy+UZEKmKhrpBZH2ERDnPwEFJxeMOKRBP7DRtqXWAUxSU0svxUF4CA18m2fi7x5RKcHY6QQCXuAeGm9cqrh5P7id4gJuAtm8qE1kHez8V/XEHWcw0QUKlWmGRjriLFzlNeKNZbQRBhmAwa5UUjwT0evWbfZcFa9l9AU8orPQyF1Dkz7fOoEFYwodyqj6Wxl3hWxGlf386iZb274leKPBgleecTnFVjgbn7k04kRD3f8fZfe3WdUAmSpNGlClmyyqLdFYZE6Z5evG68hb71heAid7trqxHgCCqoyIhdxpdQAAAABJRU5ErkJggg==" alt="Icone Eclipse"></p>
+                                    <!-- Description -->
+                                    <p>
+                                        Le programme doit offrir une interface interactive où l'utilisateur peut saisir des paires de villes et obtenir instantanément la distance qui les sépare, avec la possibilité de renouveler la requête autant de fois que nécessaire, tout en garantissant la validité des villes saisies.
+                                    </p>
+                                </div>
+                                <!-- Item 2 -->
+                                <div class="carousel-item">
+                                    <p>Image : Jeu d'essai - Tri pars sélection</p>
+                                    <img src="projects/Professionnel/BTS SIO/Jeu d'essai - Tri par sélection.png" class="d-block w-100" alt="Jeu d'essai - Tri pars sélection">
+                                    <p>Techno. utilisée : langage Java sous Eclipse IDE  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD6ElEQVR4AWIYUgDQezlAuZJEYbjX1sF6012V5+pkzo5tPSPdz7Zt2+7O2n7Gwdp6tm0b6QzvuzXsyXgmmTrni+v+fyn3Fnxc9zn3cppoaFI3l2aJgKnscd+Lvv/6026n1MfQpR9Q+I+7y6xtGwc0jpMlZTYj6kZGlE3IcSYp+/D5d5koy/FzJYCqL1RPeKrwqOEkvVD4HHL48pI6iYw6hqHIJQQqwF2ZKu/ZLA5aafF7S8krhk7+QWFw6dKyZHuTphjwFAJVwIWzMj42NvbRComnLyd+KHwayXZpZCROZ28MkoFANfmp3GUxllELCl/KHbk4HKd8Ke/sRXaUagIWv/mUoYtbubhbF1fhtI3knXzAL6qgPiJ4NrdOFnJx5EyX6ORo/GE6Aj5iYtGp14mIwm4E7mtif5mq230ozkmziyopNKCJH+SOXjwbyVq08614HtTxaeF516VruWsvzeVrhEANYNgs7V/io4/n4py0je2b379nHKgpzpy5kCKg8GwEENeBHXsSPX906+adYzdu3D7hDTxjHz96bpyA0742z8AxmTq6e06VjbbxGp6xMX+swRkQ/841QP759IONg9au+u0PMx+/u/7UR+9uOO0NVnz94+Yisd/b8IGA4psQwEz3IwBMhZptG7mBXxHAlLujWeKQgY0SBp0x0yxxdHqzpLEZ3qBJ4rCL5tipMQP5Ekif5s3Aheapw1p2aj3pgJnO6oxbndWZhjfopE46bI7dQRmvC26NDOIGkKyMM79EQc22Wfl/w9kIGO+wLh+9u+5359KV2/LRl6zYvmjOiqsLZ624UR2WL1qx1xQXWbV1x459fgJvfP3zZmEFI4qOgJmAut0hym9klQlt0J/H8eQ/czLqmZcLMrROwfElFSCh8kCIeXtspYn0GwEybV1SLnAU1gIrhUfQwD4EeGJikuMdzw4yUSFcHgJxAZMqCo5+FNitbUsb/UNF6wFNSsndC2LG6Tn1ExlxHC6hIwTW6w3x/pMgMXBaqSQETIVQNhBYCSNH7jCrWqvkkswpTclPy2NbxAXgjy+UZEKmKhrpBZH2ERDnPwEFJxeMOKRBP7DRtqXWAUxSU0svxUF4CA18m2fi7x5RKcHY6QQCXuAeGm9cqrh5P7id4gJuAtm8qE1kHez8V/XEHWcw0QUKlWmGRjriLFzlNeKNZbQRBhmAwa5UUjwT0evWbfZcFa9l9AU8orPQyF1Dkz7fOoEFYwodyqj6Wxl3hWxGlf386iZb274leKPBgleecTnFVjgbn7k04kRD3f8fZfe3WdUAmSpNGlClmyyqLdFYZE6Z5evG68hb71heAid7trqxHgCCqoyIhdxpdQAAAABJRU5ErkJggg==" alt="Icone Eclipse"></p>
+                                    <!-- Description -->
+                                    <p>
+                                        Le tri par sélection est un algorithme de tri simple et intuitif qui fonctionne en divisant le tableau en deux parties : une partie triée et une partie non triée. L'algorithme recherche systématiquement le plus petit élément dans la partie non triée et le place à la position correcte dans la partie triée.
+                                    </p>              
+                                </div>
+                                <!-- Item 3 -->
+                                <div class="carousel-item">
+                                    <p>Image : Jeu d'essai - Tri pars propagation</p>
+                                    <img src="projects/Professionnel/BTS SIO/Jeu d'essai - Tri par propagation.png" class="d-block w-100" alt="Jeu d'essai - Tri pars sélection">
+                                    <p>Techno. utilisée : langage Java sous Eclipse IDE  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD6ElEQVR4AWIYUgDQezlAuZJEYbjX1sF6012V5+pkzo5tPSPdz7Zt2+7O2n7Gwdp6tm0b6QzvuzXsyXgmmTrni+v+fyn3Fnxc9zn3cppoaFI3l2aJgKnscd+Lvv/6026n1MfQpR9Q+I+7y6xtGwc0jpMlZTYj6kZGlE3IcSYp+/D5d5koy/FzJYCqL1RPeKrwqOEkvVD4HHL48pI6iYw6hqHIJQQqwF2ZKu/ZLA5aafF7S8krhk7+QWFw6dKyZHuTphjwFAJVwIWzMj42NvbRComnLyd+KHwayXZpZCROZ28MkoFANfmp3GUxllELCl/KHbk4HKd8Ke/sRXaUagIWv/mUoYtbubhbF1fhtI3knXzAL6qgPiJ4NrdOFnJx5EyX6ORo/GE6Aj5iYtGp14mIwm4E7mtif5mq230ozkmziyopNKCJH+SOXjwbyVq08614HtTxaeF516VruWsvzeVrhEANYNgs7V/io4/n4py0je2b379nHKgpzpy5kCKg8GwEENeBHXsSPX906+adYzdu3D7hDTxjHz96bpyA0742z8AxmTq6e06VjbbxGp6xMX+swRkQ/841QP759IONg9au+u0PMx+/u/7UR+9uOO0NVnz94+Yisd/b8IGA4psQwEz3IwBMhZptG7mBXxHAlLujWeKQgY0SBp0x0yxxdHqzpLEZ3qBJ4rCL5tipMQP5Ekif5s3Aheapw1p2aj3pgJnO6oxbndWZhjfopE46bI7dQRmvC26NDOIGkKyMM79EQc22Wfl/w9kIGO+wLh+9u+5359KV2/LRl6zYvmjOiqsLZ624UR2WL1qx1xQXWbV1x459fgJvfP3zZmEFI4qOgJmAut0hym9klQlt0J/H8eQ/czLqmZcLMrROwfElFSCh8kCIeXtspYn0GwEybV1SLnAU1gIrhUfQwD4EeGJikuMdzw4yUSFcHgJxAZMqCo5+FNitbUsb/UNF6wFNSsndC2LG6Tn1ExlxHC6hIwTW6w3x/pMgMXBaqSQETIVQNhBYCSNH7jCrWqvkkswpTclPy2NbxAXgjy+UZEKmKhrpBZH2ERDnPwEFJxeMOKRBP7DRtqXWAUxSU0svxUF4CA18m2fi7x5RKcHY6QQCXuAeGm9cqrh5P7id4gJuAtm8qE1kHez8V/XEHWcw0QUKlWmGRjriLFzlNeKNZbQRBhmAwa5UUjwT0evWbfZcFa9l9AU8orPQyF1Dkz7fOoEFYwodyqj6Wxl3hWxGlf386iZb274leKPBgleecTnFVjgbn7k04kRD3f8fZfe3WdUAmSpNGlClmyyqLdFYZE6Z5evG68hb71heAid7trqxHgCCqoyIhdxpdQAAAABJRU5ErkJggg==" alt="Icone Eclipse"></p>
+                                    <!-- Description -->
+                                    <p>
+                                        Le tri par propagation (ou tri bulle) est un algorithme simple qui trie un tableau en comparant et échangeant les éléments adjacents de la gauche vers la droite, plusieurs fois jusqu’à ce que le tableau soit entièrement trié.
+                                    </p>              
+                                </div>
+                            </div>
+                            <!-- Carrousel controls -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade3" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade3" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+    
+                        <a href="projects/Professionnel/BTS SIO/D.M. - Distance intervilles  - Tri parssélection & propagation.pdf" class="btn btn-primary" download>Télécharger la documentation</a>
+                    </div>
+                  </div>
+                </div>
+              
+                <!-- Guess What -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Guess What
+                    </button>
+                  </h2>
+                  <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>Techno. utilisée : langage PHP</p>
+                        <p>La description est dans le README.adoc.</p>
+                        <a href="https://gitlab.com/m.russonprinci/guesswhat-maxime-russon" class="btn btn-primary" download>Lien vers project</a>
+                    </div>
+                  </div>
+                </div>
+              
+                <!-- Gregocity -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        Gregocity
+                    </button>
+                  </h2>
+                  <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>Un dossier d’architecture de l’infrastructure réseau permettant à l’entreprise (Gregocity) d’avoir un réseau informatique opérationnel dans ses nouveaux locaux.</p>
+                        <a href="projects/Professionnel/BTS SIO/Gregocity.zip" class="btn btn-primary" download>Télécharger fichier Zip</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        <br>
+        <!-- <h5>Projets Personnels :</h5> -->
+    </section>
+    
+    <section id="veille" class="container py-3">
+        <h2 class="text-center mb-3">Veille Technologique</h2>
+        
+        <div class="row mb-3">
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title h5">Capture de mouvement dans les jeux vidéo</h3>
+                        <p class="card-text">Technologie clé pour améliorer le réalisme et l'immersion. Utilisée dans des titres comme <strong>Resident Evil Village</strong> et <strong>Detroit: Become Human</strong>.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title h5">Technologies suivies</h3>
+                        <ul class="list-unstyled mb-0">
+                            <li>• Systèmes optiques (Vicon, OptiTrack)</li>
+                            <li>• Technologies inertielles (Xsens)</li>
+                            <li>• Capture faciale (Faceware)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <img src="https://i.ytimg.com/vi/Uk6bgWD5Cn0/maxresdefault.jpg" class="card-img-top" alt="Capture de mouvement Resident Evil" style="height: 180px; object-fit: cover;">
+                    <div class="card-body">
+                        <h4 class="card-title h6">Resident Evil Village</h4>
+                        <p class="card-text small">Techniques de capture utilisées pour Lady Dimitrescu.</p>
+                        <a href="https://www.theverge.com/22585020/resident-evil-village-mocap-motion-capture-capcom-lady-dimitrescu" class="btn btn-sm btn-outline-primary" target="_blank">Voir l'article</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <img src="https://pbs.twimg.com/tweet_video_thumb/D5AicWLUYAEs14l.jpg" class="card-img-top" alt="Capture de mouvement Detroit" style="height: 180px; object-fit: cover;">
+                    <div class="card-body">
+                        <h4 class="card-title h6">Detroit: Become Human</h4>
+                        <p class="card-text small">Innovations dans la capture faciale.</p>
+                        <a href="https://www.gamespot.com/articles/how-detroit-become-human-pushes-the-limits-of-facial/1100-6458911/" class="btn btn-sm btn-outline-primary" target="_blank">Voir l'article</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="text-center mt-2">
+            <a href="#" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#veilleModal">
+                Voir plus de détails
+            </a>
+        </div>
+    </section>
+    
+    <!-- Modal pour les détails complets -->
+    <div class="modal fade" id="veilleModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Détails de la veille technologique</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>Outils complets</h6>
+                    <ul>
+                        <li>Systèmes optiques de capture (Vicon, OptiTrack)</li>
+                        <li>Technologies inertielles (Xsens)</li>
+                        <li>Solutions faciales (Faceware, Dynamixyz)</li>
+                        <li>Logiciels d'animation (Maya, MotionBuilder)</li>
+                    </ul>
+                    
+                    <h6 class="mt-3">Méthodologie</h6>
+                    <p>Veille active via :</p>
+                    <ul>
+                        <li>Flux RSS spécialisés</li>
+                        <li>Alertes Google Scholar</li>
+                        <li>Communautés techniques (GitHub, Stack Overflow)</li>
+                        <li>Conférences et publications académiques</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Vous pouvez me contacter par e-mail à : <a href="mailto:mathisc971@gmail.com">mathisc971@gmail.com</a></p>
+        <a href="https://github.com/maxtro-code" target="_blank"><button type="button" class="btn btn-dark"><i class="bi bi-github"></i></button></a>
+        <a href="https://fr.linkedin.com/in/mathiscoco" target="_blank"><button type="button" class="btn btn-dark"><i class="bi bi-linkedin"></i></button></a>
+    </section>
+
+    <footer>
+        <p class="text-center">&copy; 2025 - Mon Portfolio</p>
+    </footer>
+</body>
+</html>

@@ -275,7 +275,25 @@
         }
         .rapport-btn:hover{background:rgba(51,240,255,.12);border-color:rgba(51,240,255,.6)}
 
-        /* ═══════ COMPÉTENCES — ICÔNES ═══════ */
+        /* ═══════ EXPÉRIENCE — CARDS ═══════ */
+        .exp-cards-wrap{display:flex;flex-direction:column;gap:1.2rem}
+        .exp-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem 1.6rem;border-left:3px solid var(--accent)}
+        .exp-card.c{border-left-color:var(--cyan)}
+        .exp-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.9rem;flex-wrap:wrap}
+        .exp-badge{font-family:var(--font-px);font-size:.34rem;font-weight:700;padding:.3rem .75rem;border-radius:20px;white-space:nowrap;flex-shrink:0}
+        .exp-badge.y{background:rgba(255,224,51,.12);color:#c8a000}
+        .exp-badge.c{background:rgba(51,240,255,.1);color:var(--cyan)}
+        .exp-badge.g{background:rgba(157,90,255,.1);color:var(--purple)}
+        .exp-card-title{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:.2rem}
+        .exp-card-sub{font-size:.78rem;color:var(--muted)}
+        .exp-items{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-top:.9rem}
+        .exp-items li{font-size:.81rem;color:var(--muted);padding-left:1rem;position:relative;line-height:1.55}
+        .exp-items li strong{color:var(--text)}
+        .exp-items li::before{content:'›';position:absolute;left:0;color:var(--accent);font-size:.95rem;line-height:1.2}
+        .exp-card.c .exp-items li::before{color:var(--cyan)}
+        .exp-note{font-size:.72rem;color:var(--muted);font-style:italic;margin-top:.6rem;padding-left:1rem}
+
+
         .skills-group-title{
             font-family:var(--font-px);font-size:.46rem;color:var(--accent);
             letter-spacing:.12em;margin-bottom:1.4rem;
@@ -694,7 +712,7 @@
                         <div class="frise-card">
                             <div class="frise-card-label lf">Formation en cours</div>
                             <div class="frise-card-title">École nationale de commerce — Paris 17e</div>
-                            <div class="frise-card-sub">Septembre 2023 → Juin 2026 · 3 ans</div>
+                            <div class="frise-card-sub">Septembre 2023 → Juin 2025 · 2 ans</div>
                             <p>BTS SIO (Services Informatiques aux Organisations), option <strong style="color:var(--text)">SLAM</strong> (Solutions Logicielles et Applications Métiers). Formation pratique et théorique en programmation, gestion des systèmes d'information, création d'applications et gestion de bases de données.</p>
                             <div class="tag-row"><span class="tag">Java</span><span class="tag">PHP</span><span class="tag">SQL</span><span class="tag">HTML/CSS/JS</span></div>
                         </div>
@@ -705,10 +723,10 @@
                         <div class="frise-card hi">
                             <div class="frise-card-label lf">Diplôme prévu</div>
                             <div class="frise-card-title">Obtention du BTS SIO SLAM</div>
-                            <div class="frise-card-sub">Juin 2026 · École nationale de commerce</div>
+                            <div class="frise-card-sub">Juin 2025 · École nationale de commerce</div>
                             <p>Fin de la formation Bac+2. Candidat à la Licence Informatique Métier Jeux Vidéo — <strong style="color:var(--accent)">CNAM Angoulême</strong>.</p>
                         </div>
-                        <div class="frise-dot-wrap"><div class="frise-dot star"></div><div class="frise-year">Juin 2026</div></div>
+                        <div class="frise-dot-wrap"><div class="frise-dot star"></div><div class="frise-year">Juin 2025</div></div>
                         <div class="frise-empty"></div>
                     </div>
 
@@ -836,59 +854,64 @@
             </div>
         </div>
 
-        <div class="frise-wrap">
-            <div class="frise-line c"></div>
-            <div class="frise">
+        <div class="exp-cards-wrap">
 
-                <!-- Nokia -->
-                <div class="frise-item">
-                    <div class="frise-empty"></div>
-                    <div class="frise-dot-wrap"><div class="frise-dot c"></div><div class="frise-year">2019</div></div>
-                    <div class="frise-card">
-                        <div class="frise-card-label ls">Stage découverte</div>
-                        <div class="frise-card-title">Nokia</div>
-                        <div class="frise-card-sub">Décembre 2019 · 1 semaine</div>
-                        <p>Stage de découverte au sein de Nokia, où j'ai eu l'opportunité d'explorer différents aspects de l'entreprise, notamment les technologies mobiles et les processus internes. J'ai participé à des activités d'observation et de support, en découvrant les défis techniques et les innovations dans le domaine des télécommunications.</p>
+            <!-- Nokia -->
+            <div class="exp-card c">
+                <div class="exp-card-top">
+                    <div>
+                        <div class="exp-card-title">Nokia</div>
+                        <div class="exp-card-sub">Décembre 2019 · 1 semaine · Stage de découverte</div>
                     </div>
+                    <span class="exp-badge g">DÉCOUVERTE</span>
                 </div>
-
-                <!-- BNP 1ère période -->
-                <div class="frise-item">
-                    <div class="frise-card">
-                        <div class="frise-card-label ls">Stage professionnel · 1ère période</div>
-                        <div class="frise-card-title">BNP Paribas</div>
-                        <div class="frise-card-sub">Juin 2024 · 5 semaines · Équipe MIDDLEWARE</div>
-                        <ul>
-                            <li>Participation au projet CLUSTER V360 : mise en place d'une passerelle de communication entre machines.</li>
-                            <li>Acquisition de compétences sur les architectures distribuées et les enjeux de performance dans les environnements critiques.</li>
-                            <li>Gestion des incidents techniques via le système de ticketing : analyse, documentation et résolution des problèmes pour l'équipe MIDDLEWARE.</li>
-                            <li>Transposition graphique de code JSON pour des processus internes, en utilisant des compétences en développement front-end.</li>
-                        </ul>
-                        <div class="tag-row"><span class="tag">Architecture distribuée</span><span class="tag">HTML/CSS/JS</span><span class="tag">JSON</span><span class="tag">Ticketing</span></div>
-                        <button class="rapport-btn" onclick="openPdfModal('Rapport%20de%20stage/Rapport%20de%20stage_BNP%20Paribas_Valmy%202_nov%202024%20-%20Mathis%20Coco.pdf','Rapport de stage — BNP Paribas · Juin 2024')">📄 Voir le rapport de stage</button>
-                    </div>
-                    <div class="frise-dot-wrap"><div class="frise-dot c"></div><div class="frise-year">2024</div></div>
-                    <div class="frise-empty"></div>
-                </div>
-
-                <!-- BNP 2ème période -->
-                <div class="frise-item">
-                    <div class="frise-empty"></div>
-                    <div class="frise-dot-wrap"><div class="frise-dot o"></div><div class="frise-year">2025</div></div>
-                    <div class="frise-card">
-                        <div class="frise-card-label ls">Stage professionnel · 2ème période</div>
-                        <div class="frise-card-title">BNP Paribas</div>
-                        <div class="frise-card-sub">Janvier → Mars 2025 · 6 semaines · Équipe MIDDLEWARE</div>
-                        <ul>
-                            <li>Poursuite des missions sur le projet CLUSTER V360.</li>
-                            <li>Gestion avancée des incidents et documentation technique pour l'équipe MIDDLEWARE.</li>
-                        </ul>
-                        <div class="tag-row"><span class="tag">Ticketing</span><span class="tag">Documentation</span></div>
-                        <button class="rapport-btn" onclick="openPdfModal('Rapport%20de%20stage/Rapport%20de%20stage_BNP%20Paribas_Valmy%202_nov%202024%20-%20Mathis%20Coco.pdf','Rapport de stage — BNP Paribas · Janvier 2025')">📄 Voir le rapport de stage</button>
-                    </div>
-                </div>
-
+                <ul class="exp-items">
+                    <li><strong>Observation des équipes techniques</strong> — découverte des processus internes et des technologies mobiles déployées par Nokia</li>
+                    <li><strong>Innovations en télécommunications</strong> — exploration des défis techniques liés aux réseaux et aux infrastructures de communication</li>
+                    <li><strong>Support opérationnel</strong> — participation à des activités d'observation et d'assistance au sein des équipes</li>
+                </ul>
+                <div class="tag-row"><span class="tag">Télécommunications</span><span class="tag">Réseaux mobiles</span><span class="tag">Observation</span></div>
             </div>
+
+            <!-- BNP 1ère année -->
+            <div class="exp-card">
+                <div class="exp-card-top">
+                    <div>
+                        <div class="exp-card-title">BNP Paribas IT — 1ère année</div>
+                        <div class="exp-card-sub">Juin – Juillet 2024 · 5 semaines · Équipe Middleware</div>
+                    </div>
+                    <span class="exp-badge y">SIO 1</span>
+                </div>
+                <ul class="exp-items">
+                    <li><strong>Création d'un parcours client digital</strong> — mission de création d'un processus de définition, approche codage : conception algorithmique, programmation, tests et implémentation JSON</li>
+                    <li><strong>Formation obligatoire Cybersécurité</strong> — sensibilisation à l'utilisation sécurisée du poste de travail fourni par BNP Paribas</li>
+                    <li><strong>Participation à la vie d'équipe</strong> — rituels agiles : daily stand-up, sprint review, rétrospective</li>
+                    <li><strong>Gestion des flux réseau</strong> — création et décommissionnement de flux sur serveurs, tickets incidents Middleware</li>
+                </ul>
+                <p class="exp-note">+ Certification Cloud Program 101 — tentée de ma propre initiative (non obligatoire)</p>
+                <div class="tag-row"><span class="tag">JSON</span><span class="tag">Confluence</span><span class="tag">Jira</span><span class="tag">Agile</span><span class="tag">Middleware</span></div>
+                <button class="rapport-btn" onclick="openPdfModal('Rapport%20de%20stage/Rapport%20de%20stage_BNP%20Paribas_Valmy%202_nov%202024%20-%20Mathis%20Coco.pdf','Rapport de stage — BNP Paribas · Juin 2024')">📄 Voir le rapport de stage</button>
+            </div>
+
+            <!-- BNP 2ème année -->
+            <div class="exp-card c">
+                <div class="exp-card-top">
+                    <div>
+                        <div class="exp-card-title">BNP Paribas IT — 2ème année</div>
+                        <div class="exp-card-sub">Janvier – Mars 2025 · 7 semaines · Équipes Dev/APS &amp; Data</div>
+                    </div>
+                    <span class="exp-badge c">SIO 2</span>
+                </div>
+                <ul class="exp-items">
+                    <li><strong>Cluster ElasticSearch V360 — BNL &amp; BCEF</strong> (qualification + production) : déploiement serveurs/VIP, ouvertures flux Tufin Cloud, upgrade ES 8.17.1</li>
+                    <li><strong>Rédaction documentation idoine</strong> sur Confluence, suivi tickets Jira</li>
+                    <li><strong>Kits d'astreinte BNL &amp; BCEF</strong> — procédures d'urgence pour équipes opérationnelles</li>
+                    <li><strong>Comités d'architectures ITSVC</strong> — accompagnement des architectes pour la préparation des dossiers</li>
+                </ul>
+                <div class="tag-row"><span class="tag">ElasticSearch</span><span class="tag">Kibana</span><span class="tag">Tufin</span><span class="tag">IaaS MZR</span><span class="tag">Jira</span></div>
+                <button class="rapport-btn" onclick="openPdfModal('Rapport%20de%20stage/Rapport%20de%20stage_BNP%20Paribas_Valmy%202_nov%202024%20-%20Mathis%20Coco.pdf','Rapport de stage — BNP Paribas · Janvier 2025')">📄 Voir le rapport de stage</button>
+            </div>
+
         </div>
     </section>
 

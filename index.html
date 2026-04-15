@@ -1,534 +1,1411 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Mathis COCO</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-</head>
-<body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <title>Mathis COCO — Portfolio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2306080f'/><ellipse cx='50' cy='65' rx='30' ry='25' fill='%23FF9B00'/><ellipse cx='50' cy='70' rx='18' ry='14' fill='%23FFCC70'/><polygon points='23,44 17,20 38,38' fill='%23FF9B00'/><polygon points='77,44 83,20 62,38' fill='%23FF9B00'/><ellipse cx='39' cy='57' rx='7' ry='7' fill='white'/><ellipse cx='61' cy='57' rx='7' ry='7' fill='white'/><circle cx='39' cy='59' r='4' fill='%231a1a2e'/><circle cx='61' cy='59' r='4' fill='%231a1a2e'/><ellipse cx='50' cy='68' rx='4' ry='2.5' fill='%23FF6B6B'/></svg>"/>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
     <style>
-        header {
-          position: fixed;
-          top: 0;
-          width: 100%;
-          z-index: 1000;
-          background-color: rgba(255, 255, 255, 0.85); /* Transparence */
-          backdrop-filter: blur(8px); /* Flou arrière-plan */
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optionnel : ombre douce */
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{
+            --bg:#06080f;--surface:#0c1120;--card:#101828;--card2:#141f30;
+            --accent:#ffe033;--accent2:#ff6b35;--cyan:#33f0ff;--purple:#9d5aff;
+            --text:#e8f0fc;--muted:#6b7fa3;--border:rgba(255,224,51,0.1);
+            --glow-y:0 0 28px rgba(255,224,51,0.22);--r:10px;
+            --font-px:'Press Start 2P',monospace;--font:'Outfit',sans-serif;
+            --nav-h:60px;
         }
-      
-        body {
-          padding-top: 70px; /* pour ne pas que le header cache le contenu */
+        html{scroll-behavior:smooth;font-size:26px}
+        body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.7;overflow-x:hidden;transition:background .3s,color .3s}
+        body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,224,51,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,224,51,0.018) 1px,transparent 1px);background-size:40px 40px}
+
+        /* ═══ MODE JOUR ═══ */
+        body.light{--bg:#f0f4f8;--surface:#fff;--card:#fff;--card2:#f8fafc;--text:#1a202c;--muted:#64748b;--border:rgba(0,0,0,0.10)}
+        body.light::before{background-image:linear-gradient(rgba(0,0,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.04) 1px,transparent 1px)}
+        body.light nav{background:rgba(240,244,248,0.96)}
+        body.light .nav-menu{background:rgba(240,244,248,0.98)}
+        body.light .scratch-card{background:linear-gradient(135deg,#fff8e1 0%,#e8f4ff 100%);border-color:rgba(255,165,0,.4)}
+        body.light .frise-card.hi{background:linear-gradient(135deg,#fffde7,#e8f5e9)}
+        body.light .mock-browser{background:#d1d5db}
+        body.light .mock-url{background:#e5e7eb;color:#374151}
+
+        /* BOUTON THÈME */
+        .theme-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,224,51,.07);border:1px solid rgba(255,224,51,.2);cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
+        .theme-btn:hover{background:rgba(255,224,51,.15)}
+        body.light .theme-btn{background:rgba(0,0,0,.05);border-color:rgba(0,0,0,.15)}
+        body.light .theme-btn:hover{background:rgba(0,0,0,.1)}
+
+        /* ═══════ NAV ═══════ */
+        nav{
+            position:fixed;top:0;left:0;right:0;z-index:300;
+            height:var(--nav-h);padding:0 1.6rem;
+            display:flex;align-items:center;justify-content:space-between;
+            background:rgba(6,8,15,0.95);backdrop-filter:blur(20px);
+            border-bottom:1px solid var(--border);
         }
-      
-        .nav-link {
-          color: #333;
+        .nav-brand{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+        .scratch-cat{width:30px;height:30px;flex-shrink:0;animation:catBob 2.4s ease-in-out infinite}
+        @keyframes catBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+        .nav-brand-text{font-family:var(--font-px);font-size:.5rem;color:var(--accent);letter-spacing:.04em;line-height:1.5}
+        .nav-brand-text span{display:block;color:var(--muted);font-size:.4rem}
+        .nav-right{display:flex;align-items:center;gap:.9rem}
+        .nav-cv{font-family:var(--font-px);font-size:.42rem;color:var(--bg);background:var(--accent);padding:.45rem .9rem;border-radius:3px;text-decoration:none;transition:box-shadow .2s,transform .15s;white-space:nowrap}
+        .nav-cv:hover{box-shadow:var(--glow-y);transform:translateY(-1px)}
+
+        /* BURGER */
+        .burger{
+            width:40px;height:40px;border-radius:8px;
+            background:rgba(255,224,51,0.07);border:1px solid rgba(255,224,51,0.2);
+            cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+            transition:background .2s;
         }
-      
-        .nav-link:hover {
-          color: #007bff;
+        .burger:hover{background:rgba(255,224,51,.14)}
+        .burger-bar{width:18px;height:2px;border-radius:1px;background:var(--accent);transition:transform .3s,opacity .3s,width .3s;transform-origin:center}
+        .burger.open .burger-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+        .burger.open .burger-bar:nth-child(2){opacity:0;width:0}
+        .burger.open .burger-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+        /* DROPDOWN */
+        .nav-menu{
+            position:fixed;top:var(--nav-h);left:0;right:0;z-index:299;
+            background:rgba(6,8,15,0.97);backdrop-filter:blur(24px);
+            border-bottom:1px solid var(--border);
+            max-height:0;overflow:hidden;
+            transition:max-height .4s cubic-bezier(.4,0,.2,1),padding .4s;
+        }
+        .nav-menu.open{max-height:520px;padding:1.2rem 0 1.6rem}
+        .nav-menu-inner{max-width:1080px;margin:0 auto;padding:0 1.6rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.35rem}
+        .nav-menu a{
+            display:flex;align-items:center;gap:.7rem;
+            padding:.75rem 1rem;border-radius:8px;
+            text-decoration:none;color:var(--muted);
+            font-size:.82rem;font-weight:600;letter-spacing:.03em;
+            transition:background .15s,color .15s;border:1px solid transparent;
+        }
+        .nav-menu a:hover{background:rgba(255,224,51,.06);color:var(--accent);border-color:var(--border)}
+        .menu-num{font-family:var(--font-px);font-size:.34rem;color:var(--accent);opacity:.45;min-width:22px}
+        .menu-sep{height:1px;background:var(--border);margin:.5rem 0;grid-column:1/-1}
+
+        /* ═══════ LAYOUT ═══════ */
+        .page{position:relative;z-index:1}
+        section{max-width:1080px;margin:0 auto;padding:96px 2rem 60px}
+        .section-eyebrow{font-family:var(--font-px);font-size:.46rem;color:var(--accent);letter-spacing:.2em;margin-bottom:.8rem}
+        h2.stitle{font-family:var(--font-px);font-size:clamp(.82rem,2.2vw,1.15rem);color:var(--text);margin-bottom:2.5rem;line-height:1.8}
+        .divider{height:1px;background:linear-gradient(90deg,transparent,var(--accent),var(--cyan),transparent);opacity:.15}
+
+        /* ═══════ SECTION HEADER WITH BADGE ═══════ */
+        .section-header{display:flex;align-items:flex-start;gap:1.4rem;margin-bottom:2.5rem}
+        .section-badge{flex-shrink:0;width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;border:1px solid var(--border)}
+        .badge-y{background:rgba(255,224,51,.07);border-color:rgba(255,224,51,.2)}
+        .badge-c{background:rgba(51,240,255,.07);border-color:rgba(51,240,255,.2)}
+        .section-header-text .section-eyebrow{margin-bottom:.4rem}
+        .section-header-text h2.stitle{margin-bottom:0}
+
+        /* ═══════ HERO ═══════ */
+        #accueil{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:var(--nav-h)}
+        .hero-inner{display:flex;flex-direction:column;align-items:center;text-align:center}
+        .hero-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--font-px);font-size:.46rem;color:var(--cyan);border:1px solid rgba(51,240,255,.3);padding:.38rem .75rem;border-radius:3px;margin-bottom:1.4rem;animation:fadeUp .5s ease both}
+        .hero-name{font-family:var(--font-px);font-size:clamp(1rem,3.8vw,2rem);line-height:1.8;color:var(--text);animation:fadeUp .6s .1s ease both}
+        .hero-name em{color:var(--accent);font-style:normal}
+        .hero-role{font-size:.95rem;color:var(--muted);margin-top:1rem;max-width:600px;animation:fadeUp .6s .2s ease both}
+        .hero-role strong{color:var(--text)}
+        .hero-btns{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;justify-content:center;animation:fadeUp .6s .3s ease both}
+        .btn{font-family:var(--font-px);font-size:.44rem;letter-spacing:.08em;padding:.72rem 1.4rem;border-radius:4px;text-decoration:none;transition:box-shadow .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+        .btn-y{color:var(--bg);background:var(--accent)}.btn-y:hover{box-shadow:var(--glow-y);transform:translateY(-2px)}
+        .btn-o{color:var(--accent);background:transparent;border:1px solid var(--accent)}.btn-o:hover{background:rgba(255,224,51,.07)}
+        .hero-avatar{aspect-ratio:1;border-radius:var(--r);border:2px solid rgba(255,224,51,.25);background:var(--card);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;animation:fadeIn .8s .4s ease both}
+        .hero-avatar::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 40% 30%,rgba(255,224,51,.08),transparent 65%)}
+        .avatar-placeholder{text-align:center;color:var(--muted);padding:1rem}
+        .avatar-placeholder svg{width:62px;height:62px;opacity:.2;margin-bottom:.5rem}
+        .avatar-placeholder small{display:block;font-family:var(--font-px);font-size:.34rem;line-height:2}
+
+        /* ═══════ SCRATCH CARD ═══════ */
+        .scratch-section{max-width:1080px;margin:0 auto;padding:0 2rem 72px}
+        .scratch-card{background:linear-gradient(135deg,#1a1200 0%,#0e1825 100%);border:2px solid rgba(255,165,0,.35);border-radius:var(--r);padding:2rem 2.4rem;display:grid;grid-template-columns:80px 1fr;gap:2rem;align-items:center;position:relative;overflow:hidden;box-shadow:0 0 40px rgba(255,140,0,.06)}
+        .scratch-card::before{content:'ORIGINE';position:absolute;top:.5rem;right:1rem;font-family:var(--font-px);font-size:.36rem;color:rgba(255,165,0,.3);letter-spacing:.2em}
+        .scratch-big-cat{width:80px;height:80px;flex-shrink:0}
+        .scratch-card-text h3{font-family:var(--font-px);font-size:.6rem;color:#ffa500;margin-bottom:.6rem;line-height:1.8}
+        .scratch-card-text p{color:var(--muted);font-size:.91rem}
+        .scratch-card-text strong{color:var(--text)}
+
+        /* ═══════ FRISE ═══════ */
+        .frise-wrap{position:relative}
+        .frise-line{position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);opacity:.25}
+        .frise-line.y{background:linear-gradient(to bottom,var(--accent),rgba(255,224,51,0))}
+        .frise-line.c{background:linear-gradient(to bottom,var(--cyan),rgba(51,240,255,0))}
+        .frise{display:flex;flex-direction:column;gap:2rem;padding:1rem 0}
+        .frise-item{display:grid;grid-template-columns:1fr 40px 1fr;align-items:start;gap:1.5rem}
+
+        /* alternance gauche/droite */
+        .frise-item:nth-child(odd)  .frise-card{grid-column:1;justify-self:end}
+        .frise-item:nth-child(odd)  .frise-dot-wrap{grid-column:2}
+        .frise-item:nth-child(odd)  .frise-empty{grid-column:3}
+        .frise-item:nth-child(even) .frise-empty{grid-column:1}
+        .frise-item:nth-child(even) .frise-dot-wrap{grid-column:2}
+        .frise-item:nth-child(even) .frise-card{grid-column:3;justify-self:start}
+
+        .frise-dot-wrap{display:flex;flex-direction:column;align-items:center;gap:.3rem}
+        .frise-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);flex-shrink:0;box-shadow:0 0 10px rgba(255,224,51,.35)}
+        .frise-dot.c{border-color:var(--cyan);box-shadow:0 0 10px rgba(51,240,255,.35)}
+        .frise-dot.o{border-color:var(--accent2);box-shadow:0 0 10px rgba(255,107,53,.35)}
+        .frise-dot.star{border-color:var(--accent);background:var(--accent);box-shadow:0 0 18px rgba(255,224,51,.7)}
+        .frise-year{font-family:var(--font-px);font-size:.36rem;color:var(--muted);text-align:center;margin-top:.2rem}
+        .frise-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.3rem 1.5rem;max-width:390px;width:100%;transition:border-color .2s}
+        .frise-card:hover{border-color:rgba(255,224,51,.28)}
+        .frise-card.hi{border-color:rgba(255,224,51,.32);background:linear-gradient(135deg,#101828,#0d1b10)}
+        .frise-card-label{font-family:var(--font-px);font-size:.36rem;letter-spacing:.12em;margin-bottom:.5rem}
+        .lf{color:var(--accent)}.ls{color:var(--cyan)}
+        .frise-card-title{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+        .frise-card-sub{font-size:.79rem;color:var(--muted);margin-bottom:.7rem}
+        .frise-card p{font-size:.82rem;color:var(--muted)}
+        .frise-card ul{list-style:none;display:flex;flex-direction:column;gap:.3rem;margin-top:.5rem}
+        .frise-card li{font-size:.8rem;color:var(--muted);padding-left:1rem;position:relative}
+        .frise-card li::before{content:'▹';position:absolute;left:0;color:var(--accent)}
+        .tag-row{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.7rem}
+        .tag{display:inline-block;font-size:.65rem;font-weight:600;color:var(--cyan);background:rgba(51,240,255,.08);border:1px solid rgba(51,240,255,.2);border-radius:3px;padding:.15rem .45rem;margin:.1rem}
+
+        /* ═══════ FORMATION — ONGLETS ═══════ */
+        .form-tabs{display:flex;gap:.5rem;margin-bottom:2rem;border-bottom:1px solid var(--border)}
+        .form-tab-btn{
+            font-family:var(--font-px);font-size:.38rem;letter-spacing:.1em;
+            padding:.75rem 1.4rem;border-radius:6px 6px 0 0;border:1px solid transparent;
+            background:transparent;color:var(--muted);cursor:pointer;
+            transition:all .2s;position:relative;bottom:-1px;
+        }
+        .form-tab-btn:hover{color:var(--accent);background:rgba(255,224,51,.05)}
+        .form-tab-btn.active{color:var(--accent);background:var(--card);border-color:var(--border);border-bottom-color:var(--card)}
+        .form-tab-num{opacity:.4;margin-right:.4rem}
+        .form-tab-panel{display:none}
+        .form-tab-panel.active{display:block}
+
+        /* ═══════ FORMATION — SYNTHÈSE ═══════ */
+        .form-synth-cards{display:flex;flex-direction:column;gap:1.6rem}
+        .form-s-card{
+            background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+            overflow:hidden;display:grid;grid-template-columns:220px 1fr;
+            transition:border-color .2s;
+        }
+        .form-s-card:hover{border-color:rgba(255,224,51,.3)}
+        .form-s-side{
+            padding:2rem 1.6rem;display:flex;flex-direction:column;justify-content:center;gap:.8rem;
+            border-right:1px solid var(--border);
+            background:linear-gradient(135deg,rgba(255,224,51,.04),transparent);
+        }
+        .form-s-icon{font-size:2.2rem;margin-bottom:.4rem}
+        .form-s-badge{font-family:var(--font-px);font-size:.28rem;letter-spacing:.1em;padding:.25rem .5rem;border-radius:3px;display:inline-block}
+        .form-s-name{font-family:var(--font-px);font-size:.48rem;color:var(--text);line-height:1.8}
+        .form-s-school{font-size:.78rem;color:var(--muted)}
+        .form-s-dates{font-family:var(--font-px);font-size:.3rem;color:var(--accent);margin-top:.2rem}
+        .form-s-main{padding:2rem;display:flex;flex-direction:column;gap:1rem}
+        .form-s-desc{font-size:.85rem;color:var(--muted);line-height:1.65}
+        .form-s-modules-title{font-family:var(--font-px);font-size:.34rem;color:var(--muted);letter-spacing:.1em;margin-bottom:.7rem}
+        .form-modules-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+        .form-module-item{font-size:.78rem;color:var(--muted);padding:.5rem .8rem;background:var(--surface);border-radius:6px;border:1px solid var(--border)}
+        .form-module-item::before{content:'▹ ';color:var(--accent)}
+        .form-module-item.muted-item{opacity:.4;font-style:italic}
+        .form-module-item.muted-item::before{color:var(--muted)}
+        .badge-target{background:rgba(157,90,255,.12);color:var(--purple);border:1px solid rgba(157,90,255,.25)}
+
+        /* ═══════ FORMATION — RÉFÉRENTIEL ═══════ */
+        .form-s-footer{
+            margin-top:auto;padding-top:1rem;
+            border-top:1px solid var(--border);
+            display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;
+        }
+        .form-s-footer-label{font-family:var(--font-px);font-size:.3rem;color:var(--muted);letter-spacing:.1em;white-space:nowrap}
+        .form-ref-link{
+            display:inline-flex;align-items:center;gap:.4rem;
+            font-size:.75rem;font-weight:600;
+            padding:.4rem .85rem;border-radius:6px;border:1px solid var(--border);
+            text-decoration:none;transition:border-color .2s,color .2s,background .2s;
+        }
+        .form-ref-link.site{color:var(--cyan);background:rgba(51,240,255,.05);border-color:rgba(51,240,255,.2)}
+        .form-ref-link.site:hover{background:rgba(51,240,255,.1);border-color:rgba(51,240,255,.45)}
+        .form-ref-link.doc{color:var(--accent);background:rgba(255,224,51,.05);border-color:rgba(255,224,51,.2)}
+        .form-ref-link.doc:hover{background:rgba(255,224,51,.1);border-color:rgba(255,224,51,.45)}
+
+        /* ═══════ BTS — MON OPTION (panneau gauche) ═══════ */
+        .bts-mon-option{margin-top:.6rem;padding:.6rem .8rem;background:rgba(255,224,51,.08);border:1px solid rgba(255,224,51,.25);border-radius:6px}
+        .bts-mon-option-label{display:block;font-family:var(--font-px);font-size:.26rem;color:var(--muted);letter-spacing:.1em;margin-bottom:.3rem}
+        .bts-mon-option-value{font-family:var(--font-px);font-size:.5rem;color:var(--accent)}
+
+        /* ═══════ BTS — GRILLE DES 2 OPTIONS ═══════ */
+        .bts-options-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+        .bts-option-col{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+        .bts-option-col.slam{border-color:rgba(255,224,51,.4);box-shadow:0 0 20px rgba(255,224,51,.06)}
+        .bts-option-header{padding:.9rem 1rem;border-bottom:1px solid var(--border);background:rgba(107,127,163,.05)}
+        .bts-option-header.slam{background:rgba(255,224,51,.05)}
+        .bts-option-tag{font-family:var(--font-px);font-size:.26rem;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:.4rem}
+        .bts-option-tag.slam{color:var(--accent)}
+        .bts-option-name{font-family:var(--font-px);font-size:.6rem;color:var(--muted);margin-bottom:.3rem}
+        .bts-option-name.slam{color:var(--accent)}
+        .bts-option-full{font-size:.72rem;color:var(--muted);line-height:1.5}
+        .bts-option-list{list-style:none;padding:.9rem 1rem;display:flex;flex-direction:column;gap:.45rem;flex:1}
+        .bts-option-list li{font-size:.75rem;color:var(--muted);padding-left:.9rem;position:relative}
+        .bts-option-list li::before{content:'▹';position:absolute;left:0;color:var(--muted)}
+        .bts-option-col.slam .bts-option-list li::before{color:var(--accent)}
+        .bts-option-debouches{margin:.5rem 1rem .9rem;padding:.6rem .8rem;background:var(--card);border-radius:6px;border:1px solid var(--border);font-size:.72rem;color:var(--muted);line-height:1.6}
+        .bts-debouche-label{display:block;font-family:var(--font-px);font-size:.26rem;color:var(--muted);letter-spacing:.08em;margin-bottom:.3rem}
+
+        @media(max-width:640px){
+            .form-s-card{grid-template-columns:1fr}
+            .form-s-side{border-right:none;border-bottom:1px solid var(--border)}
+            .form-modules-grid{grid-template-columns:1fr}
+            .bts-options-grid{grid-template-columns:1fr}
+        }
+
+        /* ═══════ COMPÉTENCES — FILTRES ═══════ */
+        .skills-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.6rem}
+        .skill-filter{
+            font-family:var(--font-px);font-size:.32rem;letter-spacing:.08em;
+            padding:.45rem .9rem;border-radius:4px;border:1px solid var(--border);
+            background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;
+        }
+        .skill-filter:hover{border-color:var(--accent);color:var(--accent)}
+        .skill-filter.active{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+        .skill-icon-card.hidden{display:none}
+
+        /* ═══════ RAPPORT DE STAGE ═══════ */
+        .rapport-btn{
+            margin-top:.9rem;font-family:var(--font-px);font-size:.32rem;letter-spacing:.06em;
+            padding:.45rem .9rem;border-radius:4px;border:1px solid rgba(51,240,255,.3);
+            background:rgba(51,240,255,.05);color:var(--cyan);cursor:pointer;
+            transition:background .2s,border-color .2s;display:inline-block;
+        }
+        .rapport-btn:hover{background:rgba(51,240,255,.12);border-color:rgba(51,240,255,.6)}
+
+        /* ═══════ COMPÉTENCES — ICÔNES ═══════ */
+        .skills-group-title{
+            font-family:var(--font-px);font-size:.46rem;color:var(--accent);
+            letter-spacing:.12em;margin-bottom:1.4rem;
+        }
+        .skills-icons-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
+            gap:1rem;
+        }
+        .skill-icon-card{
+            background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+            padding:1.2rem .8rem;
+            display:flex;flex-direction:column;align-items:center;gap:.65rem;
+            transition:border-color .22s,transform .22s,box-shadow .22s;
+            cursor:default;
+        }
+        .skill-icon-card:hover{
+            border-color:rgba(255,224,51,.4);
+            transform:translateY(-4px);
+            box-shadow:0 8px 28px rgba(0,0,0,.35), 0 0 0 1px rgba(255,224,51,.08);
+        }
+        .skill-icon-card svg,.skill-icon-card img{
+            width:40px;height:40px;
+            transition:filter .22s;
+        }
+        .skill-icon-card:hover svg,.skill-icon-card:hover img{
+            filter:drop-shadow(0 0 6px var(--accent));
+        }
+        .skill-icon-label{
+            font-size:.72rem;font-weight:700;color:var(--muted);
+            text-align:center;line-height:1.3;
+            transition:color .22s;
+        }
+        .skill-icon-card:hover .skill-icon-label{color:var(--text)}
+
+        /* ═══════ CERTIFICATIONS ═══════ */
+        .certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem}
+
+        /* carte base */
+        .cert-card{
+            background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+            padding:1.4rem;display:flex;gap:1rem;align-items:flex-start;
+            transition:border-color .2s,transform .2s;position:relative;
+        }
+        .cert-card:hover{border-color:rgba(255,224,51,.3);transform:translateY(-2px)}
+
+        /* variante EN COURS — bordure tiretée + teinte orange */
+        .cert-card.en-cours{
+            border:2px dashed rgba(255,165,0,.45);
+            background:linear-gradient(135deg,rgba(255,140,0,.04),var(--card));
+        }
+        .cert-card.en-cours:hover{border-color:rgba(255,165,0,.7)}
+
+        .cert-icon{
+            width:42px;height:42px;border-radius:8px;
+            background:rgba(255,224,51,.08);border:1px solid rgba(255,224,51,.15);
+            display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;
+        }
+        .cert-card.en-cours .cert-icon{
+            background:rgba(255,140,0,.1);border-color:rgba(255,140,0,.25);
+        }
+
+        .cert-name{font-size:.85rem;font-weight:700;color:var(--text)}
+        .cert-date{font-family:var(--font-px);font-size:.34rem;color:var(--accent);margin-top:.25rem}
+        .cert-card.en-cours .cert-date{color:#ffa500}
+        .cert-desc{font-size:.79rem;color:var(--muted);margin-top:.4rem}
+
+        /* badge statut */
+        .cert-badge{
+            position:absolute;top:.85rem;right:.85rem;
+            font-family:var(--font-px);font-size:.3rem;letter-spacing:.1em;
+            padding:.28rem .55rem;border-radius:3px;
+        }
+        .badge-done{background:rgba(34,211,160,.12);color:#22d3a0;border:1px solid rgba(34,211,160,.25)}
+        .badge-wip {
+            background:rgba(255,140,0,.12);color:#ffa500;border:1px solid rgba(255,140,0,.3);
+            /* point clignotant */
+            display:inline-flex;align-items:center;gap:.35rem;
+        }
+        .badge-wip::before{
+            content:'';width:6px;height:6px;border-radius:50%;
+            background:#ffa500;
+            animation:pulse 1.6s ease-in-out infinite;
+            flex-shrink:0;
+        }
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+
+        .cert-placeholder{
+            background:rgba(255,224,51,.025);border:2px dashed rgba(255,224,51,.13);
+            border-radius:var(--r);padding:1.4rem;
+            display:flex;align-items:center;justify-content:center;
+            font-family:var(--font-px);font-size:.36rem;
+            color:rgba(255,224,51,.25);letter-spacing:.1em;min-height:90px;
+        }
+
+        /* ═══════ PROJETS ═══════ */
+        .projects-list{display:flex;flex-direction:column;gap:2rem}
+        .project-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .2s}
+        .project-card:hover{border-color:rgba(255,224,51,.22)}
+        .project-header{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 1.6rem;gap:1rem;flex-wrap:wrap}
+        .project-left{display:flex;align-items:center;gap:1rem;flex:1}
+        .project-icon{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;background:rgba(255,224,51,.06);border:1px solid var(--border)}
+        .project-title{font-size:.95rem;font-weight:700;color:var(--text)}
+        .project-sub{font-size:.76rem;color:var(--muted);margin-top:.1rem}
+        .media-toggle{font-family:var(--font-px);font-size:.34rem;color:var(--accent);background:rgba(255,224,51,.07);border:1px solid rgba(255,224,51,.2);border-radius:4px;padding:.4rem .78rem;cursor:pointer;transition:background .2s;white-space:nowrap;letter-spacing:.06em}
+        .media-toggle:hover{background:rgba(255,224,51,.14)}
+        .media-toggle.open{color:var(--muted);background:rgba(107,127,163,.07);border-color:rgba(107,127,163,.2)}
+        .project-body{padding:0 1.6rem 1.6rem;border-top:1px solid var(--border)}
+        .project-desc{font-size:.84rem;color:var(--muted);padding-top:1rem;margin-bottom:.9rem}
+        .project-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
+        .project-link{font-family:var(--font-px);font-size:.34rem;color:var(--cyan);text-decoration:none;letter-spacing:.06em}
+        .project-link:hover{text-decoration:underline}
+        .project-media{display:none;padding:0 1.6rem 1.4rem;border-top:1px solid var(--border)}
+        .project-media.open{display:block}
+        .media-grid{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem;justify-content:center}
+        .media-grid>div{display:flex;flex-direction:column;align-items:center}
+        .media-grid img{max-height:200px;max-width:100%;border-radius:6px;border:1px solid var(--border);object-fit:contain;background:var(--surface);cursor:zoom-in;transition:opacity .2s}
+        .media-grid img:hover{opacity:.85}
+        .media-caption{font-size:.71rem;color:var(--muted);margin-top:.3rem;text-align:center}
+        /* lightbox */
+        .lb-overlay{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;cursor:zoom-out}
+        .lb-overlay.open{display:flex}
+        .lb-overlay img{max-width:92vw;max-height:88vh;border-radius:8px;border:1px solid var(--border);object-fit:contain;box-shadow:0 0 60px rgba(0,0,0,.8)}
+        .lb-close{position:absolute;top:1.2rem;right:1.4rem;font-size:1.8rem;color:#fff;cursor:pointer;line-height:1;opacity:.7}
+        .lb-close:hover{opacity:1}
+
+        /* ═══════ MOCKUP APP ═══════ */
+        .project-mockup{border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-top:1rem;font-family:'Outfit',sans-serif}
+        .mock-browser{background:#252830;padding:.45rem .8rem;display:flex;align-items:center;gap:.45rem}
+        .mock-dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0}
+        .mock-dot:nth-child(1){background:#ff5f56}.mock-dot:nth-child(2){background:#ffbd2e}.mock-dot:nth-child(3){background:#27c93f}
+        .mock-url{flex:1;background:#1a1c22;border-radius:20px;padding:.18rem .8rem;font-size:.6rem;color:#8892a4;font-family:monospace;margin-left:.4rem}
+        .mock-app{background:#f1f5f9;color:#1e293b}
+        .mock-nav-app{background:#fff;border-bottom:1px solid #e2e8f0;padding:.55rem 1rem;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap}
+        .mock-nav-logo{font-weight:800;font-size:.75rem;color:#1e293b;margin-right:.4rem}
+        .mock-nav-link{font-size:.62rem;color:#64748b;padding:.2rem .4rem;border-radius:4px}
+        .mock-nav-link.active-link{color:#2563eb;font-weight:700;background:#eff6ff}
+        .mock-nav-user{margin-left:auto;font-size:.62rem;color:#475569;font-weight:600}
+        .mock-body{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;padding:.9rem;font-size:inherit}
+        .mock-card-app{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:.8rem}
+        .mock-card-h{font-size:.67rem;font-weight:700;color:#1e293b;margin-bottom:.5rem;padding-bottom:.35rem;border-bottom:1px solid #f1f5f9}
+        .mock-row{display:flex;justify-content:space-between;align-items:center;padding:.28rem 0;border-bottom:1px solid #f8fafc;font-size:.6rem;color:#475569}
+        .mock-row:last-child{border:none}
+        .mock-day{font-weight:700;color:#1e293b;min-width:38px;font-size:.58rem}
+        .mock-badge{padding:.1rem .38rem;border-radius:4px;font-size:.52rem;font-weight:700;white-space:nowrap}
+        .mb-green{background:#dcfce7;color:#15803d}.mb-blue{background:#dbeafe;color:#1d4ed8}.mb-yellow{background:#fef9c3;color:#a16207}
+        .mock-stat-row{display:flex;justify-content:space-between;align-items:center;padding:.28rem 0;font-size:.6rem;color:#475569;border-bottom:1px solid #f8fafc}
+        .mock-stat-row:last-child{border:none}
+        .mock-stat-val{font-weight:800;font-size:.75rem;color:#1e293b}
+
+        /* ═══════ SYNTHÈSE ═══════ */
+        .synth-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem}
+        .synth-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem 1.6rem;border-left:3px solid var(--accent);transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+        .synth-card:hover{border-left-color:var(--cyan);transform:translateY(-3px)}
+        .synth-card-num{font-family:var(--font-px);font-size:.36rem;color:var(--accent);opacity:.4;margin-bottom:.5rem}
+        .synth-comp{font-size:.93rem;font-weight:700;color:var(--text);margin-bottom:.4rem}
+        .synth-context{font-size:.79rem;color:var(--muted);margin-bottom:.8rem}
+        .synth-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+        .synth-niveau{font-family:var(--font-px);font-size:.34rem;padding:.26rem .52rem;border-radius:3px}
+        .niv-maitrise{background:rgba(51,240,255,.12);color:var(--cyan)}
+        .niv-operationnel{background:rgba(255,224,51,.1);color:var(--accent)}
+        .niv-sensibilisation{background:rgba(157,90,255,.12);color:var(--purple)}
+        .niv-notions{background:rgba(107,127,163,.12);color:var(--muted)}
+
+        /* ═══════ VEILLE ═══════ */
+        .veille-frise{display:flex;flex-direction:column}
+        .veille-year-block{margin-bottom:2.5rem}
+        .veille-year-label{font-family:var(--font-px);font-size:.5rem;color:var(--purple);letter-spacing:.15em;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem}
+        .veille-year-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--purple),transparent);opacity:.3}
+        .veille-events{display:flex;flex-direction:column;gap:.9rem;padding-left:1.5rem;border-left:2px solid rgba(157,90,255,.2)}
+        .veille-event{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem 1.4rem;position:relative}
+        .veille-event::before{content:'';position:absolute;left:-1.5rem;top:50%;transform:translate(-50%,-50%);width:10px;height:10px;border-radius:50%;background:var(--purple);border:2px solid var(--bg);box-shadow:0 0 8px rgba(157,90,255,.5)}
+        .veille-event-type{font-family:var(--font-px);font-size:.34rem;color:var(--purple);letter-spacing:.1em;margin-bottom:.4rem}
+        .veille-event-title{font-size:.87rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+        .veille-event-desc{font-size:.81rem;color:var(--muted)}
+        .veille-event a{display:inline-block;margin-top:.5rem;font-size:.73rem;font-weight:600;color:var(--cyan);text-decoration:none}
+        .veille-event a:hover{text-decoration:underline}
+        .veille-tools{background:var(--card2);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem;margin-top:2rem}
+        .veille-tools h3{font-family:var(--font-px);font-size:.46rem;color:var(--purple);margin-bottom:1rem;letter-spacing:.1em}
+        .tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+        .tools-col h4{font-family:var(--font-px);font-size:.34rem;color:var(--muted);margin-bottom:.6rem;letter-spacing:.08em}
+        .tools-col ul{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+        .tools-col li{font-size:.81rem;color:var(--muted);padding-left:.9rem;position:relative}
+        .tools-col li::before{content:'·';position:absolute;left:0;color:var(--purple)}
+
+        /* ═══════ CONTACT ═══════ */
+        #contact{text-align:center}
+        .contact-box{max-width:520px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:2.5rem 2rem}
+        .contact-form{display:flex;flex-direction:column;gap:1.2rem;text-align:left}
+        .form-group{display:flex;flex-direction:column;gap:.4rem}
+        .form-label{font-family:var(--font-px);font-size:.3rem;color:var(--muted);letter-spacing:.1em}
+        .form-input{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.7rem 1rem;color:var(--text);font-family:var(--font-body);font-size:.82rem;outline:none;transition:border-color .2s}
+        .form-input:focus{border-color:var(--cyan)}
+        .form-input::placeholder{color:rgba(107,127,163,.5)}
+        textarea.form-input{resize:vertical;min-height:110px}
+        .form-submit{margin-top:.4rem;font-family:var(--font-px);font-size:.38rem;letter-spacing:.1em;color:var(--bg);background:var(--accent);border:none;border-radius:6px;padding:.85rem 2rem;cursor:pointer;transition:opacity .2s;align-self:flex-end}
+        .form-submit:hover{opacity:.85}
+        .contact-socials{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid var(--border)}
+        .c-link{display:flex;align-items:center;gap:.5rem;font-size:.79rem;font-weight:600;color:var(--text);text-decoration:none;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.65rem 1.1rem;transition:border-color .2s,color .2s}
+        .c-link:hover{border-color:var(--accent);color:var(--accent)}
+
+        /* ═══════ FOOTER ═══════ */
+        footer{position:relative;z-index:1;text-align:center;padding:2rem;font-family:var(--font-px);font-size:.34rem;color:var(--muted);letter-spacing:.1em;border-top:1px solid var(--border)}
+        footer span{color:var(--accent)}
+
+        /* ═══════ ANIMS ═══════ */
+        @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+        /* ═══════ MODAL CV ═══════ */
+        .cv-overlay{
+            position:fixed;inset:0;z-index:600;
+            background:rgba(6,8,15,0.92);backdrop-filter:blur(18px);
+            display:flex;align-items:center;justify-content:center;padding:1.5rem;
+            opacity:0;pointer-events:none;
+            transition:opacity .35s ease;
+        }
+        .cv-overlay.open{opacity:1;pointer-events:all}
+        .cv-modal{
+            background:var(--card);border:1px solid rgba(255,224,51,.25);border-radius:14px;
+            width:100%;max-width:900px;max-height:92vh;
+            display:flex;flex-direction:column;
+            transform:translateY(30px) scale(.97);
+            transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+        }
+        .cv-overlay.open .cv-modal{transform:translateY(0) scale(1)}
+        .cv-modal-header{
+            display:flex;align-items:center;justify-content:space-between;
+            padding:1.2rem 1.6rem;border-bottom:1px solid var(--border);flex-shrink:0;
+        }
+        .cv-modal-title{font-family:var(--font-px);font-size:.55rem;color:var(--accent);line-height:1.8}
+        .cv-modal-title span{display:block;font-size:.32rem;color:var(--muted);margin-top:.2rem}
+        .cv-modal-actions{display:flex;align-items:center;gap:.7rem}
+        .cv-dl-btn{
+            font-family:var(--font-px);font-size:.38rem;letter-spacing:.06em;
+            padding:.5rem 1rem;border-radius:4px;border:none;cursor:pointer;
+            color:var(--bg);background:var(--accent);
+            text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;
+            transition:box-shadow .2s,transform .15s;
+        }
+        .cv-dl-btn:hover{box-shadow:var(--glow-y);transform:translateY(-1px)}
+        .cv-close-btn{
+            width:34px;height:34px;border-radius:8px;border:1px solid var(--border);
+            background:transparent;color:var(--muted);cursor:pointer;font-size:1rem;
+            display:flex;align-items:center;justify-content:center;
+            transition:border-color .2s,color .2s;
+        }
+        .cv-close-btn:hover{border-color:var(--accent);color:var(--accent)}
+        .cv-modal-body{flex:1;overflow:hidden;padding:1rem;min-height:0}
+        .cv-modal-body iframe{
+            width:100%;height:100%;min-height:65vh;
+            border:none;border-radius:8px;background:var(--surface);
+        }
+        .cv-modal-footer{
+            padding:.9rem 1.6rem;border-top:1px solid var(--border);flex-shrink:0;
+            text-align:center;font-family:var(--font-px);font-size:.3rem;color:var(--muted);
+        }
+
+        /* ═══════ RESPONSIVE ═══════ */
+        @media(max-width:820px){
+            .hero-inner{grid-template-columns:1fr}.hero-avatar{display:none}
+            .skills-2col{grid-template-columns:1fr}
+            .frise-item{grid-template-columns:1fr 30px 1fr}.frise-card{max-width:100%}
+            .tools-grid{grid-template-columns:1fr}
+            .scratch-card{grid-template-columns:1fr}.scratch-big-cat{width:52px;height:52px}
+        }
+        @media(max-width:560px){
+            .frise-item{grid-template-columns:1fr}
+            .frise-item:nth-child(odd)  .frise-card,
+            .frise-item:nth-child(even) .frise-card{grid-column:1;justify-self:stretch}
+            .frise-dot-wrap,.frise-item .frise-empty{display:none}
+            .frise{padding-left:1rem;border-left:2px solid rgba(255,224,51,.15)}
+            .section-header{flex-direction:column;gap:.8rem}
+            .nav-menu-inner{grid-template-columns:1fr 1fr}
         }
     </style>
-    
-    <header class="border-bottom py-2">
-    <div class="container-fluid">
-      <div class="d-flex justify-content-between align-items-center flex-wrap">
-        <!-- Titre à gauche -->
-        <div class="d-flex align-items-center">
-          <h5 class="mb-0">Portfolio de Mathis COCO</h5>
+</head>
+<body>
+<div class="page">
+
+    <!-- ══════════════════════ NAV ══════════════════════ -->
+    <nav>
+        <a class="nav-brand" href="#accueil">
+            <svg class="scratch-cat" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-label="Scratch cat">
+                <ellipse cx="30" cy="38" rx="20" ry="17" fill="#FF9B00"/>
+                <ellipse cx="30" cy="40" rx="12" ry="10" fill="#FFCC70"/>
+                <polygon points="12,22 9,8 21,18" fill="#FF9B00"/><polygon points="13,21 11,11 20,18" fill="#FFB85C"/>
+                <polygon points="48,22 51,8 39,18" fill="#FF9B00"/><polygon points="47,21 49,11 40,18" fill="#FFB85C"/>
+                <ellipse cx="22" cy="31" rx="5" ry="5.5" fill="white"/><ellipse cx="38" cy="31" rx="5" ry="5.5" fill="white"/>
+                <circle cx="22" cy="32" r="3" fill="#1a1a2e"/><circle cx="38" cy="32" r="3" fill="#1a1a2e"/>
+                <circle cx="23" cy="31" r="1.2" fill="white"/><circle cx="39" cy="31" r="1.2" fill="white"/>
+                <ellipse cx="30" cy="38" rx="2.5" ry="1.5" fill="#FF6B6B"/>
+                <path d="M26,40 Q30,44 34,40" stroke="#cc4444" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                <line x1="4" y1="35" x2="18" y2="37" stroke="#fff" stroke-width="1" opacity=".7"/>
+                <line x1="4" y1="39" x2="18" y2="39" stroke="#fff" stroke-width="1" opacity=".7"/>
+                <line x1="42" y1="37" x2="56" y2="35" stroke="#fff" stroke-width="1" opacity=".7"/>
+                <line x1="42" y1="39" x2="56" y2="39" stroke="#fff" stroke-width="1" opacity=".7"/>
+                <path d="M50,50 Q62,38 55,28" stroke="#FF9B00" stroke-width="6" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div class="nav-brand-text">MATHIS COCO<span>Portfolio · BTS SIO SLAM</span></div>
+        </a>
+
+        <div class="nav-right">
+            <button class="theme-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Mode jour/nuit" title="Mode jour / nuit">🌙</button>
+            <button class="nav-cv" onclick="openCvModal()">⬇ Téléchargement CV</button>
+            <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" onclick="toggleMenu()">
+                <div class="burger-bar"></div>
+                <div class="burger-bar"></div>
+                <div class="burger-bar"></div>
+            </button>
         </div>
-        
-        <!-- Navigation + bouton CV à droite -->
-        <div class="d-flex align-items-center">
-          <nav>
-            <ul class="nav mb-0">
-              <li class="nav-item">
-                <a href="#accueil" class="nav-link px-2">Accueil</a>
-              </li>
-              <li class="nav-item">
-                <a href="#Tableau de synthèse" class="nav-link px-2">Tableau de synthèse</a>
-              </li>
-              <li class="nav-item">
-                <a href="#formation" class="nav-link px-2">Formation</a>
-              </li>
-              <li class="nav-item">
-                <a href="#competences" class="nav-link px-2">Compétences</a>
-              </li>
-              <li class="nav-item">
-                <a href="#stages" class="nav-link px-2">Stages</a>
-              </li>
-              <li class="nav-item">
-                <a href="#projets" class="nav-link px-2">Projets</a>
-              </li>
-              <li class="nav-item">
-                <a href="#veille" class="nav-link px-2">Veille</a>
-              </li>
-              <li class="nav-item">
-                <a href="#contact" class="nav-link px-2">Contact</a>
-              </li>
-            </ul>
-          </nav>
-          <a href="cv/CV - Mathis COCO.pdf" 
-             class="btn btn-sm btn-primary ms-3" download>
-            Télécharger CV
-          </a>
+    </nav>
+
+    <!-- MENU DÉROULANT -->
+    <div class="nav-menu" id="navMenu" role="navigation" aria-label="Menu principal">
+        <div class="nav-menu-inner">
+            <a href="#accueil"        onclick="closeMenu()"><span class="menu-num">00</span> Accueil</a>
+            <a href="#formation"      onclick="closeMenu()"><span class="menu-num">01</span> Formation</a>
+            <a href="#experiences"    onclick="closeMenu()"><span class="menu-num">02</span> Expériences</a>
+            <a href="#competences"    onclick="closeMenu()"><span class="menu-num">03</span> Compétences</a>
+            <a href="#certifications" onclick="closeMenu()"><span class="menu-num">04</span> Certifications</a>
+            <a href="#projets"        onclick="closeMenu()"><span class="menu-num">05</span> Projets</a>
+            <a href="#synthese"       onclick="closeMenu()"><span class="menu-num">06</span> Synthèse</a>
+            <a href="#veille"         onclick="closeMenu()"><span class="menu-num">07</span> Veille</a>
+            <a href="#contact"        onclick="closeMenu()"><span class="menu-num">08</span> Contact</a>
         </div>
-      </div>
     </div>
-    </header>
 
-      
-      
-
+    <!-- ══════════════════════ HERO ══════════════════════ -->
     <section id="accueil">
-        <h2>Je m'appelle Mathis Coco</h2>
-        <p>Bienvenue sur mon Portfolio</p>
-        <section id="aboutme"> 
-            <h2>À propos de moi</h2>
-            <p>Je suis actuellement étudiant à l'École nationale de commerce à Paris 17<sup>éme</sup>, en deuxième année de BTS SIO (Services Informatiques aux Organisations) avec l'option SLAM (Solutions Logicielles et Applications Métiers).</p>
-            <h2>Objectif professionnel</h2>
-            <p>Mon objectif est de travailler dans le développement d'applications destinées aux jeux vidéo. J'ai découvert ma passion pour ce domaine en programmant des jeux sur Scratch avec un ami.</p>
-        </section>
-    </section>
-
-    <section id="Tableau de synthèse">
-        <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Tableau de synthèse
-                </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body" style="width: 750px; height: 600px">
-                    <embed src="Mathis Coco - BTS SIO - Annexe 8-1 - Tableau de synthèse - Epreuve E4 - BTS SIO 2024.pdf" type="application/pdf" width="100%" height="100%">
-                </div>
-              </div>
-            </div>
-    </section>
-
-    <section id="formation">
-        <h2>Formation</h2>
-        <figure>
-            <blockquote class="blockquote">
-              <p>BTS SIO - Ecole nationale de commerce (Paris 17<sup>éme</sup>)</p>
-            </blockquote>
-            <figcaption class="blockquote-footer">
-              Statut :  <cite title="Source Title">en cours de formation <br> Septembre 2023 - Juin 2025 (2 ans)</cite>
-            </figcaption>
-        </figure>
-        <p>Le BTS Services Informatiques aux Organisations (SIO) est un diplôme de niveau Bac+2, qui forme les étudiants aux métiers de l'informatique. Il propose une formation pratique et théorique dans plusieurs domaines clés de l'informatique, comme la gestion des systèmes d'information, la programmation, la création d'applications, ainsi que la gestion des bases de données.</p>
-        <p>Le BTS SIO propose deux options :</p>
-        <ul>
-            <li><strong>Solutions Logicielles et Applications Métiers (SLAM)</strong> : Cette option est orientée vers le développement d'applications et de solutions logicielles, ainsi que la gestion de projets informatiques. Elle permet de maîtriser des langages comme Java, PHP, ou SQL.</li>
-            <li><strong>Administration des Réseaux et des Systèmes (SISR)</strong> : Cette option se concentre sur la gestion des infrastructures réseaux et systèmes informatiques.</li>
-        </ul>
-        <figure>
-            <blockquote class="blockquote">
-              <p>Baccalauréat scientifique - Lycée Léon Blum (Créteil)</p>
-            </blockquote>
-            <figcaption class="blockquote-footer">
-              Statut :  <cite title="Source Title">formation terminée <br> Septembre 2021 - Juin 2023 (3 ans)</cite>
-            </figcaption>
-        </figure>
-        <p>J'ai obtenu mon Baccalauréat au Lycée Léon Blum de Créteil avec une spécialisation en Mathématiques et Physique-Chimie.</p>
-        <ul>
-            <li><strong>Spécialité Mathématiques</strong></li>
-            <li><strong>Spécialité Physique-Chimie</strong></li>
-        </ul>
-    </section>
-    
-    <section id="competences">
-        <h2>Compétences & Certifications</h2>
-        <ul>
-            <li>Développement web (HTML, CSS, JavaScript)</li>
-            <li>Programmation en Java, PHP</li>
-            <li>Gestion de bases de données (SQL, MySQL)</li>
-            <li>Utilisation de Git & GitHub</li>
-        </ul>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Développement informatique</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">CyberSécurité</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Architecture réseaux</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false">Pix</button>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0"></div>
-            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><h6>MOOC de l'Anssi - Janvier 2024</h6> Initier à la cybersécurité, approfondir vos connaissances, et agir efficacement sur la protection de vos outils numériques.
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">Voir la certification</button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                                <div class="accordion-body">
-                                    <img src="certifications/Anssi/MOOC de l’ANSSI.jpg" class="rounded mx-auto d-block" alt="MOOC de l'Anssi" width="400"> Référentiel : www.secnumacademie.gouv.fr
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0"></div>
-            <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0"></div>
-        </div>
-    </section>
-
-    <section id="stages">
-        <h2>Stages</h2>
-        <p>Présentation des expériences professionnelles effectuées en entreprise.</p>
-
-        <h4>BNP Paribas</h4>
-        <p>
-          Stagiaire - Juin 2024 & Janvier à Mars 2025 (durée : cinq semaines & six semaines)<br><br>
-          Mission n°1 : Participation au projet CLUSTER V360 : Mise en place d'une passerelle de communication entre machines.<br>
-          Mission n°2 : Acquisition de compétences sur les architectures distribuées et les enjeux de performance dans les environnements critiques.<br>
-          Mission n°3 : Gestion des incidents techniques via le système de ticketing : Analyse, documentation et résolution des problèmes pour l'équipe MIDDELWARE.<br>
-          Mission n°4 : Transposition graphique de code JSON pour des processus internes, en utilisant des compétences en développement front-end.
-        </p>
-        
-        <!-- BOUTON -->
-        <p>
-          <button id="toggleBtn" class="btn btn-outline-secondary">
-            Afficher le Rapport de Stage
-          </button>
-        </p>
-        
-        <!-- CONTENEUR PDF -->
-        <div id="pdfContainer" style="display: none; border: 1px solid #ccc; padding: 10px; border-radius: 8px;">
-          <iframe src="Rapport de stage/Rapport de stage_BNP Paribas_Valmy 2_nov 2024 - Mathis Coco.pdf" width="100%" height="500px" style="border: none;"></iframe>
-        </div>
-        
-        <!-- SCRIPT POUR GÉRER L'AFFICHAGE -->
-        <script>
-          const toggleBtn = document.getElementById('toggleBtn');
-          const pdfContainer = document.getElementById('pdfContainer');
-        
-          toggleBtn.addEventListener('click', function () {
-            if (pdfContainer.style.display === 'none') {
-              pdfContainer.style.display = 'block';
-              toggleBtn.textContent = 'Masquer le Rapport de Stage';
-            } else {
-              pdfContainer.style.display = 'none';
-              toggleBtn.textContent = 'Afficher le Rapport de Stage';
-            }
-          });
-        </script>
-
-        <h4>Nokia</h4>
-        <p>Stagiaire - Décembre 2019 (durée : une semaine)<br><br>Stage de découverte au sein de Nokia, où j'ai eu l'opportunité d'explorer différents aspects de l'entreprise, notamment les technologies mobiles et les processus internes. J'ai participé à des activités d'observation et de support, en découvrant les défis techniques et les innovations dans le domaine des télécommunications.</p>
-        <ul>
-            <li>Ingénieur en télécommunication</li>
-            <li>Ingénieur en télécommunication spécialisé en Cyber Sécurité</li>
-            <li>Ingénieur en recherche sécurité pour les réseaux télécoms</li>
-            <li>Ingénieur intégrateur et de validation</li>
-            <li>Manager</li>
-        </ul>
-    </section>
-
-    <section id="projets">
-        <h2>Projets</h2>
-        <br>
-        <h5>Projets Scolaires :</h5>
-            <div class="accordion" id="accordionExample">
-                <!-- Le Nombre Mystérieux -->
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Le Nombre Mystérieux
-                    </button>
-                  </h2>
-                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-
-                        <div id="carouselExampleFade" class="carousel slide carousel-fade">
-                            <div class="carousel-inner">
-                                <!-- Item 1 -->
-                                <div class="carousel-item active">
-                                    <p>Image : Jeu d'essai - Gagné</p>
-                                    <img src="projects/Professionnel/BTS SIO/Jeu d'essais - Gagné _Le nombre mystère.gif" class="d-block w-100" alt="Jeu d'essai - Gagné">
-                                </div>
-                                <!-- Item 2 -->
-                                <div class="carousel-item">
-                                    <p>Image : Jeu d'essai - Perdue</p>
-                                    <img src="projects/Professionnel/BTS SIO/Jeu d'essais - Perdue _Le nombre mystère.gif" class="d-block w-100" alt="Jeu d'essai - Perdue">              
-                                </div>
-                            </div>
-                            <!-- Carrousel controls -->
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-
-                        <!-- Description -->
-                        <p>Techno. utilisée : langage Java sous Eclipse IDE <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD6ElEQVR4AWIYUgDQezlAuZJEYbjX1sF6012V5+pkzo5tPSPdz7Zt2+7O2n7Gwdp6tm0b6QzvuzXsyXgmmTrni+v+fyn3Fnxc9zn3cppoaFI3l2aJgKnscd+Lvv/6026n1MfQpR9Q+I+7y6xtGwc0jpMlZTYj6kZGlE3IcSYp+/D5d5koy/FzJYCqL1RPeKrwqOEkvVD4HHL48pI6iYw6hqHIJQQqwF2ZKu/ZLA5aafF7S8krhk7+QWFw6dKyZHuTphjwFAJVwIWzMj42NvbRComnLyd+KHwayXZpZCROZ28MkoFANfmp3GUxllELCl/KHbk4HKd8Ke/sRXaUagIWv/mUoYtbubhbF1fhtI3knXzAL6qgPiJ4NrdOFnJx5EyX6ORo/GE6Aj5iYtGp14mIwm4E7mtif5mq230ozkmziyopNKCJH+SOXjwbyVq08614HtTxaeF516VruWsvzeVrhEANYNgs7V/io4/n4py0je2b379nHKgpzpy5kCKg8GwEENeBHXsSPX906+adYzdu3D7hDTxjHz96bpyA0742z8AxmTq6e06VjbbxGp6xMX+swRkQ/841QP759IONg9au+u0PMx+/u/7UR+9uOO0NVnz94+Yisd/b8IGA4psQwEz3IwBMhZptG7mBXxHAlLujWeKQgY0SBp0x0yxxdHqzpLEZ3qBJ4rCL5tipMQP5Ekif5s3Aheapw1p2aj3pgJnO6oxbndWZhjfopE46bI7dQRmvC26NDOIGkKyMM79EQc22Wfl/w9kIGO+wLh+9u+5359KV2/LRl6zYvmjOiqsLZ624UR2WL1qx1xQXWbV1x459fgJvfP3zZmEFI4qOgJmAut0hym9klQlt0J/H8eQ/czLqmZcLMrROwfElFSCh8kCIeXtspYn0GwEybV1SLnAU1gIrhUfQwD4EeGJikuMdzw4yUSFcHgJxAZMqCo5+FNitbUsb/UNF6wFNSsndC2LG6Tn1ExlxHC6hIwTW6w3x/pMgMXBaqSQETIVQNhBYCSNH7jCrWqvkkswpTclPy2NbxAXgjy+UZEKmKhrpBZH2ERDnPwEFJxeMOKRBP7DRtqXWAUxSU0svxUF4CA18m2fi7x5RKcHY6QQCXuAeGm9cqrh5P7id4gJuAtm8qE1kHez8V/XEHWcw0QUKlWmGRjriLFzlNeKNZbQRBhmAwa5UUjwT0evWbfZcFa9l9AU8orPQyF1Dkz7fOoEFYwodyqj6Wxl3hWxGlf386iZb274leKPBgleecTnFVjgbn7k04kRD3f8fZfe3WdUAmSpNGlClmyyqLdFYZE6Z5evG68hb71heAid7trqxHgCCqoyIhdxpdQAAAABJRU5ErkJggg==" alt="Icone Eclipse"></p>
-                        <p>Un jeu Java pour deux joueurs doit être développé. Le premier joueur choisit un nombre secret entre 1 et 100, et le second dispose de 10 essais pour le deviner. Après chaque proposition, le programme indique si le nombre est « Trop haut ! », « Trop bas ! » ou « Gagné ». En cas de réussite, le nombre de tentatives utilisées est affiché. Le jeu doit comporter des contrôles tout au long de la partie, des messages clairs, une présentation soignée, un code bien commenté et des noms de variables clairs et bien choisis.</p>
-                        <a href="projects/Professionnel/BTS SIO/D.M. d'Algo. - Programmation_Le nombre mystérieux.pdf" class="btn btn-primary" download>Télécharger la documentation</a>
-                    </div>
-                  </div>
-                </div>
-              
-                <!-- Le mot à trouver & La calculatrice -->
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Le  mot à trouver & La calculatrice
-                    </button>
-                  </h2>
-                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      
-                        <div id="carouselExampleFade2" class="carousel slide carousel-fade">
-                            <div class="carousel-inner">
-                                <!-- Item 1 -->
-                                <div class="carousel-item active">
-                                    <p>Image : Jeu d'essai - Le  mot à trouver</p>
-                                    <img src="projects/Professionnel/BTS SIO/Jeu d'essai _Le mot à trouver .png" class="d-block w-100" alt="Jeu d'essai - Le mot à trouver">
-                                    <p>Techno. utilisée : langage Java sous Eclipse IDE  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD6ElEQVR4AWIYUgDQezlAuZJEYbjX1sF6012V5+pkzo5tPSPdz7Zt2+7O2n7Gwdp6tm0b6QzvuzXsyXgmmTrni+v+fyn3Fnxc9zn3cppoaFI3l2aJgKnscd+Lvv/6026n1MfQpR9Q+I+7y6xtGwc0jpMlZTYj6kZGlE3IcSYp+/D5d5koy/FzJYCqL1RPeKrwqOEkvVD4HHL48pI6iYw6hqHIJQQqwF2ZKu/ZLA5aafF7S8krhk7+QWFw6dKyZHuTphjwFAJVwIWzMj42NvbRComnLyd+KHwayXZpZCROZ28MkoFANfmp3GUxllELCl/KHbk4HKd8Ke/sRXaUagIWv/mUoYtbubhbF1fhtI3knXzAL6qgPiJ4NrdOFnJx5EyX6ORo/GE6Aj5iYtGp14mIwm4E7mtif5mq230ozkmziyopNKCJH+SOXjwbyVq08614HtTxaeF516VruWsvzeVrhEANYNgs7V/io4/n4py0je2b379nHKgpzpy5kCKg8GwEENeBHXsSPX906+adYzdu3D7hDTxjHz96bpyA0742z8AxmTq6e06VjbbxGp6xMX+swRkQ/841QP759IONg9au+u0PMx+/u/7UR+9uOO0NVnz94+Yisd/b8IGA4psQwEz3IwBMhZptG7mBXxHAlLujWeKQgY0SBp0x0yxxdHqzpLEZ3qBJ4rCL5tipMQP5Ekif5s3Aheapw1p2aj3pgJnO6oxbndWZhjfopE46bI7dQRmvC26NDOIGkKyMM79EQc22Wfl/w9kIGO+wLh+9u+5359KV2/LRl6zYvmjOiqsLZ624UR2WL1qx1xQXWbV1x459fgJvfP3zZmEFI4qOgJmAut0hym9klQlt0J/H8eQ/czLqmZcLMrROwfElFSCh8kCIeXtspYn0GwEybV1SLnAU1gIrhUfQwD4EeGJikuMdzw4yUSFcHgJxAZMqCo5+FNitbUsb/UNF6wFNSsndC2LG6Tn1ExlxHC6hIwTW6w3x/pMgMXBaqSQETIVQNhBYCSNH7jCrWqvkkswpTclPy2NbxAXgjy+UZEKmKhrpBZH2ERDnPwEFJxeMOKRBP7DRtqXWAUxSU0svxUF4CA18m2fi7x5RKcHY6QQCXuAeGm9cqrh5P7id4gJuAtm8qE1kHez8V/XEHWcw0QUKlWmGRjriLFzlNeKNZbQRBhmAwa5UUjwT0evWbfZcFa9l9AU8orPQyF1Dkz7fOoEFYwodyqj6Wxl3hWxGlf386iZb274leKPBgleecTnFVjgbn7k04kRD3f8fZfe3WdUAmSpNGlClmyyqLdFYZE6Z5evG68hb71heAid7trqxHgCCqoyIhdxpdQAAAABJRU5ErkJggg==" alt="Icone Eclipse"></p>
-                                    <!-- Description -->
-                                    <p>
-                                        L’objectif de ce devoir est de développer en Java un jeu dans lequel un joueur doit deviner un mot saisi par un autre utilisateur, en un nombre limité d’essais, en obtenant des indications sur les lettres communes et bien placées à chaque tentative.
-                                    </p>
-                                </div>
-                                <!-- Item 2 -->
-                                <div class="carousel-item">
-                                    <p>Image : Calculatrice</p>
-                                    <img src="projects/Professionnel/BTS SIO/Test-calculatrice.gif" class="d-block w-100" alt="Calculatrice">
-                                    <p>Techno. utilisée : HTML,CSS et JavaScript</p>
-                                    <!-- Description -->
-                                    <p>
-                                        L'objectif de ce projet est de développer une calculatrice graphique en JavaScript permettant d'effectuer des opérations mathématiques en cascade sur des entiers avec une interface simple et intuitive.
-                                    </p>              
-                                </div>
-                            </div>
-                            <!-- Carrousel controls -->
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade2" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade2" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-
-                        <a href="projects/Professionnel/BTS SIO/D.M. d'Algo. - Programmation_Le nombre mystérieux.pdf" class="btn btn-primary" download>Télécharger la documentation</a>
-                    </div>
-                  </div>
-                </div>
-              
-                <!-- Distance intervilles, Tri parssélection & propagation -->
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Distance intervilles, Tri pars sélection & propagation
-                    </button>
-                  </h2>
-                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      
-                        <div id="carouselExampleFade3" class="carousel slide carousel-fade">
-                            <div class="carousel-inner">
-                                <!-- Item 1 -->
-                                <div class="carousel-item active">
-                                    <p>Image : Jeu d'essai - Distance intervilles</p>
-                                    <img src="projects/Professionnel/BTS SIO/Jeu d'essai - Distance Intervilles.png" class="d-block w-100" alt="Jeu d'essai - Distance intervilles">
-                                    <p>Techno. utilisée : langage Java sous Eclipse IDE  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD6ElEQVR4AWIYUgDQezlAuZJEYbjX1sF6012V5+pkzo5tPSPdz7Zt2+7O2n7Gwdp6tm0b6QzvuzXsyXgmmTrni+v+fyn3Fnxc9zn3cppoaFI3l2aJgKnscd+Lvv/6026n1MfQpR9Q+I+7y6xtGwc0jpMlZTYj6kZGlE3IcSYp+/D5d5koy/FzJYCqL1RPeKrwqOEkvVD4HHL48pI6iYw6hqHIJQQqwF2ZKu/ZLA5aafF7S8krhk7+QWFw6dKyZHuTphjwFAJVwIWzMj42NvbRComnLyd+KHwayXZpZCROZ28MkoFANfmp3GUxllELCl/KHbk4HKd8Ke/sRXaUagIWv/mUoYtbubhbF1fhtI3knXzAL6qgPiJ4NrdOFnJx5EyX6ORo/GE6Aj5iYtGp14mIwm4E7mtif5mq230ozkmziyopNKCJH+SOXjwbyVq08614HtTxaeF516VruWsvzeVrhEANYNgs7V/io4/n4py0je2b379nHKgpzpy5kCKg8GwEENeBHXsSPX906+adYzdu3D7hDTxjHz96bpyA0742z8AxmTq6e06VjbbxGp6xMX+swRkQ/841QP759IONg9au+u0PMx+/u/7UR+9uOO0NVnz94+Yisd/b8IGA4psQwEz3IwBMhZptG7mBXxHAlLujWeKQgY0SBp0x0yxxdHqzpLEZ3qBJ4rCL5tipMQP5Ekif5s3Aheapw1p2aj3pgJnO6oxbndWZhjfopE46bI7dQRmvC26NDOIGkKyMM79EQc22Wfl/w9kIGO+wLh+9u+5359KV2/LRl6zYvmjOiqsLZ624UR2WL1qx1xQXWbV1x459fgJvfP3zZmEFI4qOgJmAut0hym9klQlt0J/H8eQ/czLqmZcLMrROwfElFSCh8kCIeXtspYn0GwEybV1SLnAU1gIrhUfQwD4EeGJikuMdzw4yUSFcHgJxAZMqCo5+FNitbUsb/UNF6wFNSsndC2LG6Tn1ExlxHC6hIwTW6w3x/pMgMXBaqSQETIVQNhBYCSNH7jCrWqvkkswpTclPy2NbxAXgjy+UZEKmKhrpBZH2ERDnPwEFJxeMOKRBP7DRtqXWAUxSU0svxUF4CA18m2fi7x5RKcHY6QQCXuAeGm9cqrh5P7id4gJuAtm8qE1kHez8V/XEHWcw0QUKlWmGRjriLFzlNeKNZbQRBhmAwa5UUjwT0evWbfZcFa9l9AU8orPQyF1Dkz7fOoEFYwodyqj6Wxl3hWxGlf386iZb274leKPBgleecTnFVjgbn7k04kRD3f8fZfe3WdUAmSpNGlClmyyqLdFYZE6Z5evG68hb71heAid7trqxHgCCqoyIhdxpdQAAAABJRU5ErkJggg==" alt="Icone Eclipse"></p>
-                                    <!-- Description -->
-                                    <p>
-                                        Le programme doit offrir une interface interactive où l'utilisateur peut saisir des paires de villes et obtenir instantanément la distance qui les sépare, avec la possibilité de renouveler la requête autant de fois que nécessaire, tout en garantissant la validité des villes saisies.
-                                    </p>
-                                </div>
-                                <!-- Item 2 -->
-                                <div class="carousel-item">
-                                    <p>Image : Jeu d'essai - Tri pars sélection</p>
-                                    <img src="projects/Professionnel/BTS SIO/Jeu d'essai - Tri par sélection.png" class="d-block w-100" alt="Jeu d'essai - Tri pars sélection">
-                                    <p>Techno. utilisée : langage Java sous Eclipse IDE  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD6ElEQVR4AWIYUgDQezlAuZJEYbjX1sF6012V5+pkzo5tPSPdz7Zt2+7O2n7Gwdp6tm0b6QzvuzXsyXgmmTrni+v+fyn3Fnxc9zn3cppoaFI3l2aJgKnscd+Lvv/6026n1MfQpR9Q+I+7y6xtGwc0jpMlZTYj6kZGlE3IcSYp+/D5d5koy/FzJYCqL1RPeKrwqOEkvVD4HHL48pI6iYw6hqHIJQQqwF2ZKu/ZLA5aafF7S8krhk7+QWFw6dKyZHuTphjwFAJVwIWzMj42NvbRComnLyd+KHwayXZpZCROZ28MkoFANfmp3GUxllELCl/KHbk4HKd8Ke/sRXaUagIWv/mUoYtbubhbF1fhtI3knXzAL6qgPiJ4NrdOFnJx5EyX6ORo/GE6Aj5iYtGp14mIwm4E7mtif5mq230ozkmziyopNKCJH+SOXjwbyVq08614HtTxaeF516VruWsvzeVrhEANYNgs7V/io4/n4py0je2b379nHKgpzpy5kCKg8GwEENeBHXsSPX906+adYzdu3D7hDTxjHz96bpyA0742z8AxmTq6e06VjbbxGp6xMX+swRkQ/841QP759IONg9au+u0PMx+/u/7UR+9uOO0NVnz94+Yisd/b8IGA4psQwEz3IwBMhZptG7mBXxHAlLujWeKQgY0SBp0x0yxxdHqzpLEZ3qBJ4rCL5tipMQP5Ekif5s3Aheapw1p2aj3pgJnO6oxbndWZhjfopE46bI7dQRmvC26NDOIGkKyMM79EQc22Wfl/w9kIGO+wLh+9u+5359KV2/LRl6zYvmjOiqsLZ624UR2WL1qx1xQXWbV1x459fgJvfP3zZmEFI4qOgJmAut0hym9klQlt0J/H8eQ/czLqmZcLMrROwfElFSCh8kCIeXtspYn0GwEybV1SLnAU1gIrhUfQwD4EeGJikuMdzw4yUSFcHgJxAZMqCo5+FNitbUsb/UNF6wFNSsndC2LG6Tn1ExlxHC6hIwTW6w3x/pMgMXBaqSQETIVQNhBYCSNH7jCrWqvkkswpTclPy2NbxAXgjy+UZEKmKhrpBZH2ERDnPwEFJxeMOKRBP7DRtqXWAUxSU0svxUF4CA18m2fi7x5RKcHY6QQCXuAeGm9cqrh5P7id4gJuAtm8qE1kHez8V/XEHWcw0QUKlWmGRjriLFzlNeKNZbQRBhmAwa5UUjwT0evWbfZcFa9l9AU8orPQyF1Dkz7fOoEFYwodyqj6Wxl3hWxGlf386iZb274leKPBgleecTnFVjgbn7k04kRD3f8fZfe3WdUAmSpNGlClmyyqLdFYZE6Z5evG68hb71heAid7trqxHgCCqoyIhdxpdQAAAABJRU5ErkJggg==" alt="Icone Eclipse"></p>
-                                    <!-- Description -->
-                                    <p>
-                                        Le tri par sélection est un algorithme de tri simple et intuitif qui fonctionne en divisant le tableau en deux parties : une partie triée et une partie non triée. L'algorithme recherche systématiquement le plus petit élément dans la partie non triée et le place à la position correcte dans la partie triée.
-                                    </p>              
-                                </div>
-                                <!-- Item 3 -->
-                                <div class="carousel-item">
-                                    <p>Image : Jeu d'essai - Tri pars propagation</p>
-                                    <img src="projects/Professionnel/BTS SIO/Jeu d'essai - Tri par propagation.png" class="d-block w-100" alt="Jeu d'essai - Tri pars sélection">
-                                    <p>Techno. utilisée : langage Java sous Eclipse IDE  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD6ElEQVR4AWIYUgDQezlAuZJEYbjX1sF6012V5+pkzo5tPSPdz7Zt2+7O2n7Gwdp6tm0b6QzvuzXsyXgmmTrni+v+fyn3Fnxc9zn3cppoaFI3l2aJgKnscd+Lvv/6026n1MfQpR9Q+I+7y6xtGwc0jpMlZTYj6kZGlE3IcSYp+/D5d5koy/FzJYCqL1RPeKrwqOEkvVD4HHL48pI6iYw6hqHIJQQqwF2ZKu/ZLA5aafF7S8krhk7+QWFw6dKyZHuTphjwFAJVwIWzMj42NvbRComnLyd+KHwayXZpZCROZ28MkoFANfmp3GUxllELCl/KHbk4HKd8Ke/sRXaUagIWv/mUoYtbubhbF1fhtI3knXzAL6qgPiJ4NrdOFnJx5EyX6ORo/GE6Aj5iYtGp14mIwm4E7mtif5mq230ozkmziyopNKCJH+SOXjwbyVq08614HtTxaeF516VruWsvzeVrhEANYNgs7V/io4/n4py0je2b379nHKgpzpy5kCKg8GwEENeBHXsSPX906+adYzdu3D7hDTxjHz96bpyA0742z8AxmTq6e06VjbbxGp6xMX+swRkQ/841QP759IONg9au+u0PMx+/u/7UR+9uOO0NVnz94+Yisd/b8IGA4psQwEz3IwBMhZptG7mBXxHAlLujWeKQgY0SBp0x0yxxdHqzpLEZ3qBJ4rCL5tipMQP5Ekif5s3Aheapw1p2aj3pgJnO6oxbndWZhjfopE46bI7dQRmvC26NDOIGkKyMM79EQc22Wfl/w9kIGO+wLh+9u+5359KV2/LRl6zYvmjOiqsLZ624UR2WL1qx1xQXWbV1x459fgJvfP3zZmEFI4qOgJmAut0hym9klQlt0J/H8eQ/czLqmZcLMrROwfElFSCh8kCIeXtspYn0GwEybV1SLnAU1gIrhUfQwD4EeGJikuMdzw4yUSFcHgJxAZMqCo5+FNitbUsb/UNF6wFNSsndC2LG6Tn1ExlxHC6hIwTW6w3x/pMgMXBaqSQETIVQNhBYCSNH7jCrWqvkkswpTclPy2NbxAXgjy+UZEKmKhrpBZH2ERDnPwEFJxeMOKRBP7DRtqXWAUxSU0svxUF4CA18m2fi7x5RKcHY6QQCXuAeGm9cqrh5P7id4gJuAtm8qE1kHez8V/XEHWcw0QUKlWmGRjriLFzlNeKNZbQRBhmAwa5UUjwT0evWbfZcFa9l9AU8orPQyF1Dkz7fOoEFYwodyqj6Wxl3hWxGlf386iZb274leKPBgleecTnFVjgbn7k04kRD3f8fZfe3WdUAmSpNGlClmyyqLdFYZE6Z5evG68hb71heAid7trqxHgCCqoyIhdxpdQAAAABJRU5ErkJggg==" alt="Icone Eclipse"></p>
-                                    <!-- Description -->
-                                    <p>
-                                        Le tri par propagation (ou tri bulle) est un algorithme simple qui trie un tableau en comparant et échangeant les éléments adjacents de la gauche vers la droite, plusieurs fois jusqu’à ce que le tableau soit entièrement trié.
-                                    </p>              
-                                </div>
-                            </div>
-                            <!-- Carrousel controls -->
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade3" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade3" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-    
-                        <a href="projects/Professionnel/BTS SIO/D.M. - Distance intervilles  - Tri parssélection & propagation.pdf" class="btn btn-primary" download>Télécharger la documentation</a>
-                    </div>
-                  </div>
-                </div>
-              
-                <!-- Guess What -->
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingFour">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        Guess What
-                    </button>
-                  </h2>
-                  <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <p>Techno. utilisée : langage PHP</p>
-                        <p>La description est dans le README.adoc.</p>
-                        <a href="https://gitlab.com/m.russonprinci/guesswhat-maxime-russon" class="btn btn-primary" download>Lien vers project</a>
-                    </div>
-                  </div>
-                </div>
-              
-                <!-- Gregocity -->
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingFive">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                        Gregocity
-                    </button>
-                  </h2>
-                  <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <p>Un dossier d’architecture de l’infrastructure réseau permettant à l’entreprise (Gregocity) d’avoir un réseau informatique opérationnel dans ses nouveaux locaux.</p>
-                        <a href="projects/Professionnel/BTS SIO/Gregocity.zip" class="btn btn-primary" download>Télécharger fichier Zip</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        <br>
-        <!-- <h5>Projets Personnels :</h5> -->
-    </section>
-    
-    <section id="veille" class="container py-3">
-        <h2 class="text-center mb-3">Veille Technologique</h2>
-        
-        <div class="row mb-3">
-            <div class="col-md-6 mb-3">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h3 class="card-title h5">Capture de mouvement dans les jeux vidéo</h3>
-                        <p class="card-text">Technologie clé pour améliorer le réalisme et l'immersion. Utilisée dans des titres comme <strong>Resident Evil Village</strong> et <strong>Detroit: Become Human</strong>.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h3 class="card-title h5">Technologies suivies</h3>
-                        <ul class="list-unstyled mb-0">
-                            <li>• Systèmes optiques (Vicon, OptiTrack)</li>
-                            <li>• Technologies inertielles (Xsens)</li>
-                            <li>• Capture faciale (Faceware)</li>
-                        </ul>
-                    </div>
-                </div>
+        <div class="hero-inner">
+            <div class="hero-eyebrow"><span>🎮</span> Candidat · Licence Informatique Jeux Vidéo · CNAM Angoulême</div>
+            <h1 class="hero-name">Je m'appelle<br/><em>Mathis Coco</em></h1>
+            <p class="hero-role">Bienvenue sur mon Portfolio.<br/><strong>Étudiant à l'École nationale de commerce à Paris 17e</strong>, en deuxième année de BTS SIO (Services Informatiques aux Organisations) avec l'option SLAM (Solutions Logicielles et Applications Métiers).</p>
+            <p class="hero-role" style="margin-top:.8rem"><strong>Objectif professionnel :</strong> travailler dans le développement d'applications destinées aux jeux vidéo.</p>
+            <div class="hero-btns">
+                <a class="btn btn-y" href="#projets">🕹 Voir mes projets</a>
+                <a class="btn btn-o" href="#contact">Contacter</a>
             </div>
         </div>
-    
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <div class="card h-100">
-                    <img src="https://i.ytimg.com/vi/Uk6bgWD5Cn0/maxresdefault.jpg" class="card-img-top" alt="Capture de mouvement Resident Evil" style="height: 180px; object-fit: cover;">
-                    <div class="card-body">
-                        <h4 class="card-title h6">Resident Evil Village</h4>
-                        <p class="card-text small">Techniques de capture utilisées pour Lady Dimitrescu.</p>
-                        <a href="https://www.theverge.com/22585020/resident-evil-village-mocap-motion-capture-capcom-lady-dimitrescu" class="btn btn-sm btn-outline-primary" target="_blank">Voir l'article</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-                <div class="card h-100">
-                    <img src="https://pbs.twimg.com/tweet_video_thumb/D5AicWLUYAEs14l.jpg" class="card-img-top" alt="Capture de mouvement Detroit" style="height: 180px; object-fit: cover;">
-                    <div class="card-body">
-                        <h4 class="card-title h6">Detroit: Become Human</h4>
-                        <p class="card-text small">Innovations dans la capture faciale.</p>
-                        <a href="https://www.gamespot.com/articles/how-detroit-become-human-pushes-the-limits-of-facial/1100-6458911/" class="btn btn-sm btn-outline-primary" target="_blank">Voir l'article</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-        <div class="text-center mt-2">
-            <a href="#" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#veilleModal">
-                Voir plus de détails
-            </a>
-        </div>
     </section>
-    
-    <!-- Modal pour les détails complets -->
-    <div class="modal fade" id="veilleModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Détails de la veille technologique</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <h6>Outils complets</h6>
-                    <ul>
-                        <li>Systèmes optiques de capture (Vicon, OptiTrack)</li>
-                        <li>Technologies inertielles (Xsens)</li>
-                        <li>Solutions faciales (Faceware, Dynamixyz)</li>
-                        <li>Logiciels d'animation (Maya, MotionBuilder)</li>
-                    </ul>
-                    
-                    <h6 class="mt-3">Méthodologie</h6>
-                    <p>Veille active via :</p>
-                    <ul>
-                        <li>Flux RSS spécialisés</li>
-                        <li>Alertes Google Scholar</li>
-                        <li>Communautés techniques (GitHub, Stack Overflow)</li>
-                        <li>Conférences et publications académiques</li>
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                </div>
+
+    <!-- SCRATCH CARD -->
+    <div class="scratch-section">
+        <div class="scratch-card">
+            <svg class="scratch-big-cat" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="30" cy="38" rx="20" ry="17" fill="#FF9B00"/><ellipse cx="30" cy="40" rx="12" ry="10" fill="#FFCC70"/>
+                <polygon points="12,22 9,8 21,18" fill="#FF9B00"/><polygon points="13,21 11,11 20,18" fill="#FFB85C"/>
+                <polygon points="48,22 51,8 39,18" fill="#FF9B00"/><polygon points="47,21 49,11 40,18" fill="#FFB85C"/>
+                <ellipse cx="22" cy="31" rx="5" ry="5.5" fill="white"/><ellipse cx="38" cy="31" rx="5" ry="5.5" fill="white"/>
+                <circle cx="22" cy="32" r="3" fill="#1a1a2e"/><circle cx="38" cy="32" r="3" fill="#1a1a2e"/>
+                <circle cx="23" cy="31" r="1.2" fill="white"/><circle cx="39" cy="31" r="1.2" fill="white"/>
+                <ellipse cx="30" cy="38" rx="2.5" ry="1.5" fill="#FF6B6B"/>
+                <path d="M26,40 Q30,44 34,40" stroke="#cc4444" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                <line x1="4" y1="35" x2="18" y2="37" stroke="#fff" stroke-width="1" opacity=".7"/>
+                <line x1="4" y1="39" x2="18" y2="39" stroke="#fff" stroke-width="1" opacity=".7"/>
+                <line x1="42" y1="37" x2="56" y2="35" stroke="#fff" stroke-width="1" opacity=".7"/>
+                <line x1="42" y1="39" x2="56" y2="39" stroke="#fff" stroke-width="1" opacity=".7"/>
+                <path d="M50,50 Q62,38 55,28" stroke="#FF9B00" stroke-width="6" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div class="scratch-card-text">
+                <h3>🎮 L'origine de ma passion</h3>
+                <p>J'ai découvert ma passion pour le développement de jeux vidéo en <strong>programmant des jeux sur Scratch avec un ami</strong>. C'est cette expérience fondatrice qui m'a conduit vers l'informatique et orienté vers <strong>le développement d'applications destinées aux jeux vidéo</strong>.</p>
             </div>
         </div>
     </div>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Vous pouvez me contacter par e-mail à : <a href="mailto:mathisc971@gmail.com">mathisc971@gmail.com</a></p>
-        <a href="https://github.com/maxtro-code" target="_blank"><button type="button" class="btn btn-dark"><i class="bi bi-github"></i></button></a>
-        <a href="https://fr.linkedin.com/in/mathiscoco" target="_blank"><button type="button" class="btn btn-dark"><i class="bi bi-linkedin"></i></button></a>
+    <div class="divider"></div>
+
+    <!-- ══════════════════════ 01 · FORMATION ══════════════════════ -->
+    <section id="formation">
+        <div class="section-header">
+            <div class="section-badge badge-y">🎓</div>
+            <div class="section-header-text">
+                <p class="section-eyebrow">// 01 — FORMATION</p>
+                <h2 class="stitle">Parcours<br/>académique</h2>
+            </div>
+        </div>
+
+        <!-- ONGLETS -->
+        <div class="form-tabs">
+            <button class="form-tab-btn active" onclick="switchFormTab('parcours',this)">
+                <span class="form-tab-num">01</span>Chronologie
+            </button>
+            <button class="form-tab-btn" onclick="switchFormTab('synthese',this)">
+                <span class="form-tab-num">02</span>Synthèse détaillée
+            </button>
+        </div>
+
+        <!-- PANEL 1 : FRISE -->
+        <div class="form-tab-panel active" id="ftab-parcours">
+            <div class="frise-wrap">
+                <div class="frise-line y"></div>
+                <div class="frise">
+
+                    <!-- Lycée Léon Blum -->
+                    <div class="frise-item">
+                        <div class="frise-card">
+                            <div class="frise-card-label lf">Diplôme obtenu</div>
+                            <div class="frise-card-title">Lycée Léon Blum — Créteil</div>
+                            <div class="frise-card-sub">Septembre 2021 → Juin 2023 · 3 ans</div>
+                            <p>J'ai obtenu mon Baccalauréat au Lycée Léon Blum de Créteil avec une spécialisation en Mathématiques et Physique-Chimie.</p>
+                            <div class="tag-row">
+                                <span class="tag">Spécialité Mathématiques</span>
+                                <span class="tag">Spécialité Physique-Chimie</span>
+                            </div>
+                        </div>
+                        <div class="frise-dot-wrap"><div class="frise-dot"></div><div class="frise-year">2021</div></div>
+                        <div class="frise-empty"></div>
+                    </div>
+
+                    <!-- BTS SIO -->
+                    <div class="frise-item">
+                        <div class="frise-empty"></div>
+                        <div class="frise-dot-wrap"><div class="frise-dot"></div><div class="frise-year">2023</div></div>
+                        <div class="frise-card">
+                            <div class="frise-card-label lf">Formation en cours</div>
+                            <div class="frise-card-title">École nationale de commerce — Paris 17e</div>
+                            <div class="frise-card-sub">Septembre 2023 → Juin 2025 · 2 ans</div>
+                            <p>BTS SIO (Services Informatiques aux Organisations), option <strong style="color:var(--text)">SLAM</strong> (Solutions Logicielles et Applications Métiers). Formation pratique et théorique en programmation, gestion des systèmes d'information, création d'applications et gestion de bases de données.</p>
+                            <div class="tag-row"><span class="tag">Java</span><span class="tag">PHP</span><span class="tag">SQL</span><span class="tag">HTML/CSS/JS</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Diplôme prévu -->
+                    <div class="frise-item">
+                        <div class="frise-card hi">
+                            <div class="frise-card-label lf">Diplôme prévu</div>
+                            <div class="frise-card-title">Obtention du BTS SIO SLAM</div>
+                            <div class="frise-card-sub">Juin 2025 · École nationale de commerce</div>
+                            <p>Fin de la formation Bac+2. Candidat à la Licence Informatique Métier Jeux Vidéo — <strong style="color:var(--accent)">CNAM Angoulême</strong>.</p>
+                        </div>
+                        <div class="frise-dot-wrap"><div class="frise-dot star"></div><div class="frise-year">Juin 2025</div></div>
+                        <div class="frise-empty"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 2 : SYNTHÈSE -->
+        <div class="form-tab-panel" id="ftab-synthese">
+            <div class="form-synth-cards">
+
+                <!-- Bac -->
+                <div class="form-s-card">
+                    <div class="form-s-side">
+                        <div class="form-s-icon">📘</div>
+                        <span class="form-s-badge badge-done">✓ OBTENU</span>
+                        <div class="form-s-name">BACCALAURÉAT<br/>GÉNÉRAL</div>
+                        <div class="form-s-school">Lycée Léon Blum · Créteil</div>
+                        <div class="form-s-dates">JUIN 2023</div>
+                    </div>
+                    <div class="form-s-main">
+                        <p class="form-s-desc">Formation scientifique généraliste avec deux spécialités : Mathématiques et Physique-Chimie. Acquisition d'une rigueur analytique et d'un raisonnement logique, bases fondamentales pour l'informatique.</p>
+                        <div>
+                            <div class="form-s-modules-title">// SPÉCIALITÉS</div>
+                            <div class="form-modules-grid">
+                                <div class="form-module-item">Mathématiques</div>
+                                <div class="form-module-item">Physique-Chimie</div>
+                                <div class="form-module-item muted-item">Cinéma-Audiovisuel</div>
+                            </div>
+                        </div>
+                        <div class="form-s-footer">
+                            <span class="form-s-footer-label">// RÉFÉRENTIEL</span>
+                            <a class="form-ref-link site" href="https://www.education.gouv.fr/le-baccalaureat-general-10457" target="_blank">🌐 education.gouv.fr</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BTS SIO -->
+                <div class="form-s-card">
+                    <div class="form-s-side">
+                        <div class="form-s-icon">💻</div>
+                        <span class="form-s-badge badge-wip">⚡ EN COURS</span>
+                        <div class="form-s-name">BTS SIO</div>
+                        <div class="form-s-school">École nationale de commerce · Paris 17e</div>
+                        <div class="form-s-dates">2023 → 2025</div>
+                        <div class="bts-mon-option">
+                            <span class="bts-mon-option-label">Mon option</span>
+                            <span class="bts-mon-option-value">SLAM</span>
+                        </div>
+                    </div>
+                    <div class="form-s-main">
+                        <p class="form-s-desc">Bac+2 en informatique de gestion. Prépare à intégrer le service informatique d'une entreprise en tant que technicien ou développeur, selon l'option choisie.</p>
+
+                        <div class="bts-options-grid">
+
+                            <!-- Option A — SISR -->
+                            <div class="bts-option-col">
+                                <div class="bts-option-header">
+                                    <span class="bts-option-tag">Option A</span>
+                                    <div class="bts-option-name">SISR</div>
+                                    <div class="bts-option-full">Systèmes, réseaux &amp; infrastructure</div>
+                                </div>
+                            </div>
+
+                            <!-- Option B — SLAM -->
+                            <div class="bts-option-col slam">
+                                <div class="bts-option-header slam">
+                                    <span class="bts-option-tag slam">Option B · Mon choix ⭐</span>
+                                    <div class="bts-option-name slam">SLAM</div>
+                                    <div class="bts-option-full">Développement logiciel &amp; applications</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-s-footer">
+                            <span class="form-s-footer-label">// RÉFÉRENTIEL</span>
+                            <a class="form-ref-link site" href="https://www.onisep.fr/ressources/univers-formation/formations/post-bac/bts-services-informatiques-aux-organisations-option-b-solutions-logicielles-et-applications-metiers" target="_blank">🌐 onisep.fr — SLAM</a>
+                            <a class="form-ref-link doc" href="https://archives.reseaucerta.org/sio2019/accueil" target="_blank">📄 Référentiel BTS SIO</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Licence CNAM -->
+                <div class="form-s-card">
+                    <div class="form-s-side">
+                        <div class="form-s-icon">🎮</div>
+                        <span class="form-s-badge badge-target">🎯 OBJECTIF</span>
+                        <div class="form-s-name">LICENCE<br/>JEU VIDÉO</div>
+                        <div class="form-s-school">CNAM Angoulême</div>
+                        <div class="form-s-dates">À PARTIR DE 2025</div>
+                    </div>
+                    <div class="form-s-main">
+                        <p class="form-s-desc">Licence Informatique spécialité Métiers du Jeu Vidéo. Formation orientée vers le développement de jeux, la programmation C++ et les moteurs de jeu, en adéquation avec mon objectif professionnel.</p>
+                        <div>
+                            <div class="form-s-modules-title">// DOMAINES VISÉS</div>
+                            <div class="form-modules-grid">
+                                <div class="form-module-item">Programmation C++</div>
+                                <div class="form-module-item">Moteurs de jeu</div>
+                                <div class="form-module-item">Game Design</div>
+                                <div class="form-module-item">Graphisme 3D</div>
+                            </div>
+                        </div>
+                        <div class="tag-row"><span class="tag">C++</span><span class="tag">Unity / Unreal</span><span class="tag">Game Dev</span></div>
+                        <div class="form-s-footer">
+                            <span class="form-s-footer-label">// RÉFÉRENTIEL</span>
+                            <a class="form-ref-link site" href="https://www.cnam.fr/formation/arts-spectacle-industries-creatives/audiovisuel/licence-generale-informatique-parcours-jeu-video-5" target="_blank">🌐 cnam.fr</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </section>
 
-    <footer>
-        <p class="text-center">&copy; 2025 - Mon Portfolio</p>
-    </footer>
+    <div class="divider"></div>
+
+    <!-- ══════════════════════ 02 · EXPÉRIENCES ══════════════════════ -->
+    <section id="experiences">
+        <div class="section-header">
+            <div class="section-badge badge-c">💼</div>
+            <div class="section-header-text">
+                <p class="section-eyebrow">// 02 — EXPÉRIENCES PROFESSIONNELLES</p>
+                <h2 class="stitle">Stages<br/>en entreprise</h2>
+            </div>
+        </div>
+
+        <div class="frise-wrap">
+            <div class="frise-line c"></div>
+            <div class="frise">
+
+                <!-- Nokia -->
+                <div class="frise-item">
+                    <div class="frise-empty"></div>
+                    <div class="frise-dot-wrap"><div class="frise-dot c"></div><div class="frise-year">2019</div></div>
+                    <div class="frise-card">
+                        <div class="frise-card-label ls">Stage découverte</div>
+                        <div class="frise-card-title">Nokia</div>
+                        <div class="frise-card-sub">Décembre 2019 · 1 semaine</div>
+                        <p>Stage de découverte au sein de Nokia, où j'ai eu l'opportunité d'explorer différents aspects de l'entreprise, notamment les technologies mobiles et les processus internes. J'ai participé à des activités d'observation et de support, en découvrant les défis techniques et les innovations dans le domaine des télécommunications.</p>
+                    </div>
+                </div>
+
+                <!-- BNP 1ère période -->
+                <div class="frise-item">
+                    <div class="frise-card">
+                        <div class="frise-card-label ls">Stage professionnel · 1ère période</div>
+                        <div class="frise-card-title">BNP Paribas</div>
+                        <div class="frise-card-sub">Juin 2024 · 5 semaines · Équipe MIDDLEWARE</div>
+                        <ul>
+                            <li>Participation au projet CLUSTER V360 : mise en place d'une passerelle de communication entre machines.</li>
+                            <li>Acquisition de compétences sur les architectures distribuées et les enjeux de performance dans les environnements critiques.</li>
+                            <li>Gestion des incidents techniques via le système de ticketing : analyse, documentation et résolution des problèmes pour l'équipe MIDDLEWARE.</li>
+                            <li>Transposition graphique de code JSON pour des processus internes, en utilisant des compétences en développement front-end.</li>
+                        </ul>
+                        <div class="tag-row"><span class="tag">Architecture distribuée</span><span class="tag">HTML/CSS/JS</span><span class="tag">JSON</span><span class="tag">Ticketing</span></div>
+                        <button class="rapport-btn" onclick="openPdfModal('Rapport%20de%20stage/Rapport%20de%20stage_BNP%20Paribas_Valmy%202_nov%202024%20-%20Mathis%20Coco.pdf','Rapport de stage — BNP Paribas · Juin 2024')">📄 Voir le rapport de stage</button>
+                    </div>
+                    <div class="frise-dot-wrap"><div class="frise-dot c"></div><div class="frise-year">2024</div></div>
+                    <div class="frise-empty"></div>
+                </div>
+
+                <!-- BNP 2ème période -->
+                <div class="frise-item">
+                    <div class="frise-empty"></div>
+                    <div class="frise-dot-wrap"><div class="frise-dot o"></div><div class="frise-year">2025</div></div>
+                    <div class="frise-card">
+                        <div class="frise-card-label ls">Stage professionnel · 2ème période</div>
+                        <div class="frise-card-title">BNP Paribas</div>
+                        <div class="frise-card-sub">Janvier → Mars 2025 · 6 semaines · Équipe MIDDLEWARE</div>
+                        <ul>
+                            <li>Poursuite des missions sur le projet CLUSTER V360.</li>
+                            <li>Gestion avancée des incidents et documentation technique pour l'équipe MIDDLEWARE.</li>
+                        </ul>
+                        <div class="tag-row"><span class="tag">Ticketing</span><span class="tag">Documentation</span></div>
+                        <button class="rapport-btn" onclick="openPdfModal('Rapport%20de%20stage/Rapport%20de%20stage_BNP%20Paribas_Valmy%202_nov%202024%20-%20Mathis%20Coco.pdf','Rapport de stage — BNP Paribas · Janvier 2025')">📄 Voir le rapport de stage</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════ 03 · COMPÉTENCES ══════════════════════ -->
+    <section id="competences">
+        <p class="section-eyebrow">// 03 — COMPÉTENCES</p>
+        <h2 class="stitle">Compétences<br/>techniques</h2>
+
+        <!-- FILTRES -->
+        <div class="skills-filters">
+            <button class="skill-filter active" onclick="filterSkills('all',this)">Tout</button>
+            <button class="skill-filter" onclick="filterSkills('frontend',this)">Frontend</button>
+            <button class="skill-filter" onclick="filterSkills('backend',this)">Backend</button>
+            <button class="skill-filter" onclick="filterSkills('framework',this)">Frameworks</button>
+            <button class="skill-filter" onclick="filterSkills('database',this)">Base de données</button>
+            <button class="skill-filter" onclick="filterSkills('logiciel',this)">Logiciels</button>
+            <button class="skill-filter" onclick="filterSkills('autre',this)">Autre</button>
+        </div>
+
+        <div class="skills-icons-grid" id="skillsGrid">
+
+            <!-- FRONTEND -->
+            <div class="skill-icon-card" data-cat="frontend">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M4 0l2.4 27L16 30l9.6-3L28 0z" fill="#e44d26"/><path d="M16 27.7V2.3H26.1L24 25.4z" fill="#f16529"/><path d="M16 11.5H11.5l-.3-3.3H16V4.9H7.6l.8 9H16zm0 8.7l-.1.1-3.9-1-.2-2.8H8.5l.5 5.7 7 1.9V20.2z" fill="#ebebeb"/><path d="M16 11.5v3.3h4.1l-.4 4.4-3.7 1v3.4l7-1.9.1-.8.8-9.4H16zm0-6.6v3.3h8.1l.3-3.3z" fill="#fff"/></svg>
+                <span class="skill-icon-label">HTML5</span>
+            </div>
+
+            <div class="skill-icon-card" data-cat="frontend">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M4 0l2.4 27L16 30l9.6-3L28 0z" fill="#1572b6"/><path d="M16 27.7V2.3H26.1L24 25.4z" fill="#33a9dc"/><path d="M16 13H11.4l.3 3.3H16v-3.3zm-4.8-5.2l.3 3.2H16V7.8z" fill="#ebebeb"/><path d="M16 13v3.3h3.8l-.4 4-3.4.9V24l6.8-1.9.1-.6.9-10.5H16zm0-5.2v3.2h7.5l.3-3.2z" fill="#fff"/></svg>
+                <span class="skill-icon-label">CSS3</span>
+            </div>
+
+            <div class="skill-icon-card" data-cat="frontend">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="3" fill="#f7df1e"/><path d="M18.8 25.4c.7 1.2 1.6 2 3.2 2 1.3 0 2.2-.7 2.2-1.6 0-1.1-.9-1.5-2.3-2.1l-.8-.3c-2.3-1-3.8-2.2-3.8-4.8 0-2.4 1.8-4.2 4.7-4.2 2 0 3.5.7 4.5 2.5l-2.5 1.6c-.5-1-.9-1.4-1.9-1.4-1 0-1.6.6-1.6 1.4 0 1 .6 1.4 2 2l.8.3c2.7 1.1 4.2 2.3 4.2 4.9 0 2.8-2.2 4.4-5.2 4.4-2.9 0-4.8-1.4-5.7-3.2zm-10 .3c.5.9 1 1.7 2.1 1.7.9 0 1.5-.4 1.5-1.9V14.7h3.2v10.9c0 3.1-1.8 4.5-4.5 4.5-2.4 0-3.8-1.2-4.5-2.7z" fill="#323330"/></svg>
+                <span class="skill-icon-label">JavaScript</span>
+            </div>
+
+            <!-- BACKEND -->
+            <div class="skill-icon-card" data-cat="backend">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M12.2 22.5s-1.2.7.8.9c2.4.3 3.6.2 6.2-.2 0 0 .7.4 1.6.8-5.7 2.4-12.9-.1-8.6-1.5z" fill="#5382a1"/><path d="M11.5 19.5s-1.3 1 .7 1.2c2.6.3 4.7.3 8.2-.4 0 0 .5.5 1.2.7-7.3 2.1-15.4.2-10.1-1.5z" fill="#5382a1"/><path d="M17.3 13.7c1.5 1.7-.4 3.2-.4 3.2s3.7-1.9 2-4.3c-1.6-2.2-2.8-3.3 3.8-7.1 0 0-10.4 2.6-5.4 8.2z" fill="#e76f00"/><path d="M24.2 24.5s.9.7-.9 1.3c-3.4 1-14.1 1.3-17.1 0-1.1-.5.9-1.1 1.5-1.3.6-.1 1-.1 1-.1-1.1-.8-7.4 1.6-3.2 2.3 11.5 1.9 21-1 18.7-2.2z" fill="#5382a1"/><path d="M12.8 16.4s-5.1 1.2-1.8 1.6c1.4.2 4.1.1 6.6-.1 2.1-.2 4.1-.5 4.1-.5s-.7.3-1.2.6c-5 1.3-14.6.7-11.8-.6 2.3-1.1 4.1-1 4.1-1z" fill="#5382a1"/><path d="M21.5 21.1c5.1-2.6 2.7-5.2 1.1-4.8-.4.1-.6.2-.6.2s.2-.3.5-.4c3.5-1.2 6.2 3.6-1 5.5 0 0 .1-.1 0-.5z" fill="#5382a1"/><path d="M19 3s2.9 2.9-2.8 7.4c-4.6 3.6-1.1 5.7 0 8.1-2.7-2.4-4.7-4.5-3.4-6.5 2-3 7.5-4.5 6.2-9z" fill="#e76f00"/><path d="M13.4 28.7c4.9.3 12.4-.2 12.6-2.4 0 0-.3.9-4.1 1.6-4.2.8-9.4.7-12.5.2 0 0 .6.5 4 .6z" fill="#5382a1"/></svg>
+                <span class="skill-icon-label">Java</span>
+            </div>
+
+            <div class="skill-icon-card" data-cat="backend">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><ellipse cx="16" cy="16" rx="16" ry="9.5" fill="#8892bf"/><path d="M9.2 19.7l.7-3.6H8.4l.2-1.1h1.5l.3-1.7h1.2l-.3 1.7h1.5l-.2 1.1h-1.5l-.6 3c-.1.5 0 .7.5.7h.8l-.2 1.1h-1c-1.3 0-1.5-.7-1.4-1.2zm4.5-6.4h2.5c1.6 0 2.1 1 1.8 2.4-.3 1.5-1.2 2.4-2.7 2.4h-1.3l-.5 2.6h-1.3zm1.1 3.7h1c.7 0 1.1-.4 1.3-1.3.1-.7-.1-1.2-.8-1.2h-1zm4.3-3.7h1.3l-.3 1.5c.4-.9 1-1.6 2-1.6h.4l-.3 1.4h-.5c-1 0-1.6.6-1.9 2.1l-.5 2.6h-1.3z" fill="#fff"/></svg>
+                <span class="skill-icon-label">PHP</span>
+            </div>
+
+            <!-- FRAMEWORKS -->
+            <div class="skill-icon-card" data-cat="framework">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 2L2 9.5v13L16 30l14-7.5v-13z" fill="#42b883" opacity=".15"/><path d="M16 5L4 11.5v9L16 27l12-6.5v-9z" fill="none" stroke="#42b883" stroke-width="1.2"/><path d="M10 13l6 3.5 6-3.5M16 16.5V24" stroke="#42b883" stroke-width="1.5" stroke-linecap="round"/><text x="16" y="15" text-anchor="middle" font-family="monospace" font-size="5" font-weight="bold" fill="#42b883">V</text></svg>
+                <span class="skill-icon-label">Vue.js</span>
+            </div>
+
+            <div class="skill-icon-card" data-cat="framework">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 3c-7 0-13 6-13 13s6 13 13 13 13-6 13-13S23 3 16 3z" fill="#ff2d20" opacity=".15"/><path d="M16 5c-6 0-11 5-11 11s5 11 11 11 11-5 11-11S22 5 16 5z" fill="none" stroke="#ff2d20" stroke-width="1.2"/><text x="16" y="20" text-anchor="middle" font-family="monospace" font-size="9" font-weight="bold" fill="#ff2d20">L</text></svg>
+                <span class="skill-icon-label">Laravel</span>
+            </div>
+
+            <!-- BASES DE DONNÉES -->
+            <div class="skill-icon-card" data-cat="database">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 3C9.4 3 4 5.2 4 8v16c0 2.8 5.4 5 12 5s12-2.2 12-5V8c0-2.8-5.4-5-12-5z" fill="#00758f"/><ellipse cx="16" cy="8" rx="12" ry="5" fill="#f29111"/><path d="M28 12c0 2.8-5.4 5-12 5S4 14.8 4 12" fill="none" stroke="#00758f" stroke-width="1.5"/><path d="M28 16c0 2.8-5.4 5-12 5S4 18.8 4 16" fill="none" stroke="#00758f" stroke-width="1.5"/><text x="16" y="22" text-anchor="middle" font-family="monospace" font-size="5" font-weight="bold" fill="white">MySQL</text></svg>
+                <span class="skill-icon-label">MySQL</span>
+            </div>
+
+            <div class="skill-icon-card" data-cat="database">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 3C9.4 3 4 5.2 4 8v16c0 2.8 5.4 5 12 5s12-2.2 12-5V8c0-2.8-5.4-5-12-5z" fill="#c0392b"/><ellipse cx="16" cy="8" rx="12" ry="5" fill="#e74c3c"/><path d="M28 12c0 2.8-5.4 5-12 5S4 14.8 4 12" fill="none" stroke="#c0392b" stroke-width="1.5"/><path d="M28 16c0 2.8-5.4 5-12 5S4 18.8 4 16" fill="none" stroke="#c0392b" stroke-width="1.5"/><text x="16" y="22" text-anchor="middle" font-family="monospace" font-size="4" font-weight="bold" fill="white">SQL Server</text></svg>
+                <span class="skill-icon-label">SQL Server</span>
+            </div>
+
+            <!-- LOGICIELS -->
+            <div class="skill-icon-card" data-cat="logiciel">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M2 4l11 11L2 26l4 4 13-13 13 13 4-4L19 15 32 2l-4-4L15 11 2 0z" fill="none"/><rect x="2" y="2" width="28" height="28" rx="4" fill="#007acc" opacity=".15"/><path d="M6 11l7 7-7 7" stroke="#007acc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><line x1="16" y1="25" x2="26" y2="25" stroke="#007acc" stroke-width="2.5" stroke-linecap="round"/></svg>
+                <span class="skill-icon-label">VS Code</span>
+            </div>
+
+            <div class="skill-icon-card" data-cat="logiciel">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="28" height="28" rx="4" fill="#c0392b" opacity=".12"/><rect x="4" y="8" width="24" height="16" rx="2" fill="none" stroke="#c0392b" stroke-width="1.5"/><circle cx="16" cy="16" r="4" fill="none" stroke="#c0392b" stroke-width="1.5"/><path d="M16 12v-4M16 24v-4M12 16H8M24 16h-4" stroke="#c0392b" stroke-width="1.2" stroke-linecap="round"/><text x="16" y="30" text-anchor="middle" font-family="monospace" font-size="3.5" fill="#c0392b">SSMS</text></svg>
+                <span class="skill-icon-label">SQL Server<br/>Management</span>
+            </div>
+
+            <div class="skill-icon-card" data-cat="logiciel">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="28" height="28" rx="4" fill="#4caf50" opacity=".12"/><rect x="6" y="6" width="20" height="14" rx="2" fill="none" stroke="#4caf50" stroke-width="1.5"/><circle cx="16" cy="13" r="3" fill="none" stroke="#4caf50" stroke-width="1.2"/><path d="M10 26h12M16 20v6" stroke="#4caf50" stroke-width="1.5" stroke-linecap="round"/><text x="16" y="30" text-anchor="middle" font-family="monospace" font-size="3" fill="#4caf50">Laragon</text></svg>
+                <span class="skill-icon-label">Laragon</span>
+            </div>
+
+            <div class="skill-icon-card" data-cat="logiciel">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="13" fill="#2c2255"/><ellipse cx="14" cy="16" rx="8" ry="10" fill="#f7941e" opacity=".9"/><ellipse cx="18" cy="16" rx="8" ry="10" fill="#2c2255"/><path d="M8 13h12" stroke="#f7941e" stroke-width="1.5" stroke-linecap="round"/><path d="M8 19h12" stroke="#f7941e" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span class="skill-icon-label">Eclipse IDE</span>
+            </div>
+
+            <div class="skill-icon-card" data-cat="logiciel">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="6" fill="#FF9B00" opacity=".15"/><ellipse cx="16" cy="19" rx="9" ry="8" fill="#FF9B00"/><ellipse cx="16" cy="20" rx="5.5" ry="4.5" fill="#FFCC70"/><polygon points="9,13 7.5,6 13,11" fill="#FF9B00"/><polygon points="9.5,13 8,8 12.5,11.5" fill="#FFB85C"/><polygon points="23,13 24.5,6 19,11" fill="#FF9B00"/><polygon points="22.5,13 24,8 19.5,11.5" fill="#FFB85C"/><circle cx="12.5" cy="17" r="2.5" fill="white"/><circle cx="19.5" cy="17" r="2.5" fill="white"/><circle cx="12.5" cy="17.5" r="1.4" fill="#1a1a2e"/><circle cx="19.5" cy="17.5" r="1.4" fill="#1a1a2e"/></svg>
+                <span class="skill-icon-label">Scratch</span>
+            </div>
+
+            <!-- OUTILS -->
+            <div class="skill-icon-card" data-cat="logiciel">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M30.7 14.7L17.3 1.3a2.2 2.2 0 0 0-3.1 0l-3 3 3.8 3.8a2.6 2.6 0 0 1 3.3 3.3l3.6 3.6a2.6 2.6 0 1 1-1.6 1.5l-3.4-3.4v8.7a2.6 2.6 0 1 1-2.1 0v-8.8a2.6 2.6 0 0 1-1.4-3.4L9.6 5.8 1.3 14.1a2.2 2.2 0 0 0 0 3.1l13.4 13.4a2.2 2.2 0 0 0 3.1 0l12.9-12.9a2.2 2.2 0 0 0 0-3z" fill="#f05032"/></svg>
+                <span class="skill-icon-label">Git</span>
+            </div>
+
+            <div class="skill-icon-card" data-cat="logiciel">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16 2a14 14 0 0 0-4.4 27.3c.7.1 1-.3 1-.7v-2.5c-3.9.8-4.7-1.9-4.7-1.9-.6-1.6-1.5-2-1.5-2-1.2-.8.1-.8.1-.8 1.4.1 2.1 1.4 2.1 1.4 1.2 2.1 3.2 1.5 4 1.1.1-.9.5-1.5.9-1.9-3.1-.3-6.4-1.6-6.4-7 0-1.5.5-2.8 1.4-3.8-.1-.4-.6-1.8.1-3.7 0 0 1.1-.4 3.7 1.4a12.8 12.8 0 0 1 6.8 0c2.6-1.8 3.7-1.4 3.7-1.4.8 2 .3 3.4.1 3.7.9 1 1.4 2.3 1.4 3.8 0 5.4-3.3 6.6-6.4 7 .5.4.9 1.3.9 2.6v3.9c0 .4.3.8 1 .7A14 14 0 0 0 16 2z" fill="#e8f0fc"/></svg>
+                <span class="skill-icon-label">GitHub</span>
+            </div>
+
+            <!-- AUTRE -->
+            <div class="skill-icon-card" data-cat="autre">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 2L4 7v9c0 7 5.2 13.6 12 15.4C22.8 29.6 28 23 28 16V7z" fill="#9d5aff" opacity=".25"/><path d="M16 4.5L6 8.7v7.7c0 5.6 4.1 10.8 10 12.4 5.9-1.6 10-6.8 10-12.4V8.7z" fill="none" stroke="#9d5aff" stroke-width="1.5"/><path d="M12 16l3 3 6-6" stroke="#9d5aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                <span class="skill-icon-label">Cybersécurité</span>
+            </div>
+
+            <div class="skill-icon-card" data-cat="autre">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="6" r="3.5" fill="none" stroke="#33f0ff" stroke-width="1.5"/><circle cx="5" cy="24" r="3.5" fill="none" stroke="#33f0ff" stroke-width="1.5"/><circle cx="27" cy="24" r="3.5" fill="none" stroke="#33f0ff" stroke-width="1.5"/><line x1="16" y1="9.5" x2="7" y2="21" stroke="#33f0ff" stroke-width="1.2" opacity=".6"/><line x1="16" y1="9.5" x2="25" y2="21" stroke="#33f0ff" stroke-width="1.2" opacity=".6"/><line x1="8.5" y1="24" x2="23.5" y2="24" stroke="#33f0ff" stroke-width="1.2" opacity=".6"/></svg>
+                <span class="skill-icon-label">Réseaux</span>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════ 04 · CERTIFICATIONS ══════════════════════ -->
+    <section id="certifications">
+        <p class="section-eyebrow">// 04 — CERTIFICATIONS</p>
+        <h2 class="stitle">Certifications</h2>
+        <div class="certs-grid">
+
+            <!-- ANSSI -->
+            <div class="cert-card">
+                <span class="cert-badge badge-done">✓ OBTENU</span>
+                <div class="cert-icon">
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 2L4 7v9c0 7 5.2 13.6 12 15.4C22.8 29.6 28 23 28 16V7z" fill="#9d5aff" opacity=".3"/><path d="M16 4.5L6 8.7v7.7c0 5.6 4.1 10.8 10 12.4 5.9-1.6 10-6.8 10-12.4V8.7z" fill="none" stroke="#9d5aff" stroke-width="1.5"/><path d="M12 16l3 3 6-6" stroke="#9d5aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                </div>
+                <div>
+                    <div class="cert-name">SecNumAcadémie — ANSSI</div>
+                    <div class="cert-date">Janvier 2024</div>
+                    <div class="cert-desc">Formation aux fondamentaux de la cybersécurité : protection des données, sécurité des réseaux, gestion des incidents et bonnes pratiques numériques.</div>
+                </div>
+            </div>
+
+            <!-- PIX -->
+            <div class="cert-card">
+                <span class="cert-badge badge-done">✓ OBTENU</span>
+                <div class="cert-icon">
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="26" height="26" rx="4" fill="#3d6fb5" opacity=".2"/><rect x="3" y="3" width="26" height="26" rx="4" fill="none" stroke="#3d6fb5" stroke-width="1.5"/><text x="16" y="22" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#3d6fb5">Pix</text></svg>
+                </div>
+                <div>
+                    <div class="cert-name">Certification Pix</div>
+                    <div class="cert-date">Décembre 2024</div>
+                    <div class="cert-desc">410/895 points · Niveau Indépendant 2. Évaluation des compétences numériques selon le référentiel européen DigComp (information, communication, création, sécurité).</div>
+                </div>
+            </div>
+
+            <!-- Python -->
+            <div class="cert-card">
+                <span class="cert-badge badge-done">✓ OBTENU</span>
+                <div class="cert-icon">
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 2c-4 0-7 1.5-7 4v3h7v1H7C4 10 2 12.5 2 16s2 6 5 6h2v-3c0-2.5 2.5-4 7-4s7 1.5 7 4v3h2c3 0 5-2.5 5-6s-2-6-5-6h-2V6c0-2.5-3-4-7-4z" fill="#3776ab"/><path d="M16 17c4 0 7 1.5 7 4v3h-2v-3c0-1.5-2-3-5-3s-5 1.5-5 3v3H9v-3c0-2.5 3-4 7-4z" fill="#ffd43b"/><circle cx="12" cy="7" r="1.5" fill="white"/><circle cx="20" cy="25" r="1.5" fill="white"/></svg>
+                </div>
+                <div>
+                    <div class="cert-name">Python Essentials 1 — Cisco</div>
+                    <div class="cert-date">Mai 2025</div>
+                    <div class="cert-desc">Introduction aux fondamentaux de Python : variables, types de données, conditions, boucles, fonctions et gestion des exceptions.</div>
+                </div>
+            </div>
+
+            <!-- JavaScript -->
+            <div class="cert-card">
+                <span class="cert-badge badge-done">✓ OBTENU</span>
+                <div class="cert-icon">
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="3" fill="#f7df1e"/><path d="M18.8 25.4c.7 1.2 1.6 2 3.2 2 1.3 0 2.2-.7 2.2-1.6 0-1.1-.9-1.5-2.3-2.1l-.8-.3c-2.3-1-3.8-2.2-3.8-4.8 0-2.4 1.8-4.2 4.7-4.2 2 0 3.5.7 4.5 2.5l-2.5 1.6c-.5-1-.9-1.4-1.9-1.4-1 0-1.6.6-1.6 1.4 0 1 .6 1.4 2 2l.8.3c2.7 1.1 4.2 2.3 4.2 4.9 0 2.8-2.2 4.4-5.2 4.4-2.9 0-4.8-1.4-5.7-3.2zm-10 .3c.5.9 1 1.7 2.1 1.7.9 0 1.5-.4 1.5-1.9V14.7h3.2v10.9c0 3.1-1.8 4.5-4.5 4.5-2.4 0-3.8-1.2-4.5-2.7z" fill="#323330"/></svg>
+                </div>
+                <div>
+                    <div class="cert-name">JavaScript Essentials 1 — Cisco</div>
+                    <div class="cert-date">Avril 2025</div>
+                    <div class="cert-desc">Initiation à JavaScript : syntaxe de base, manipulation du DOM, événements, fonctions et premiers pas en programmation web interactive.</div>
+                </div>
+            </div>
+
+            <!-- English for IT -->
+            <div class="cert-card">
+                <span class="cert-badge badge-done">✓ OBTENU</span>
+                <div class="cert-icon">
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="13" fill="#012169" opacity=".15"/><circle cx="16" cy="16" r="13" fill="none" stroke="#012169" stroke-width="1.5"/><path d="M3 16h26M16 3v26" stroke="#012169" stroke-width="1.2" opacity=".5"/><path d="M3 10l26 12M29 10L3 22" stroke="#cc0001" stroke-width="1.5" opacity=".6"/><text x="16" y="20" text-anchor="middle" font-family="monospace" font-size="6" font-weight="bold" fill="#012169">EN</text></svg>
+                </div>
+                <div>
+                    <div class="cert-name">English for IT — Cisco</div>
+                    <div class="cert-date">Mai 2025</div>
+                    <div class="cert-desc">Anglais technique orienté informatique : vocabulaire IT, communication professionnelle écrite et orale, compréhension de documentation technique.</div>
+                </div>
+            </div>
+
+            <!-- C++ EN COURS -->
+            <div class="cert-card en-cours">
+                <span class="cert-badge badge-wip">EN COURS</span>
+                <div class="cert-icon">
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="28" height="28" rx="4" fill="#00599c" opacity=".15"/><text x="16" y="21" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#00599c">C++</text></svg>
+                </div>
+                <div>
+                    <div class="cert-name">C++ Essentials — Cisco</div>
+                    <div class="cert-date">En cours · 2025</div>
+                    <div class="cert-desc">Introduction à la programmation en C++ : syntaxe, structures de contrôle, pointeurs, gestion mémoire et bases de la programmation orientée objet.</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════ 05 · PROJETS ══════════════════════ -->
+    <section id="projets">
+        <p class="section-eyebrow">// 05 — PROJETS</p>
+        <h2 class="stitle">Projets<br/>scolaires</h2>
+        <div class="projects-list">
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-left"><div class="project-icon">🎯</div><div><div class="project-title">Le Nombre Mystérieux</div><div class="project-sub">Java · Eclipse IDE</div></div></div>
+                    <button class="media-toggle" onclick="toggleMedia(this,'media-nombre')">▶ Voir les captures</button>
+                </div>
+                <div class="project-media" id="media-nombre">
+                    <div class="media-grid">
+                        <div><img src="https://maxtro-code.github.io/portfolio/projects/Professionnel/BTS%20SIO/Jeu%20d'essais%20-%20Gagn%C3%A9%20_Le%20nombre%20myst%C3%A8re.gif" alt="Gagné" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Jeu d'essai — Gagné</div></div>
+                        <div><img src="https://maxtro-code.github.io/portfolio/projects/Professionnel/BTS%20SIO/Jeu%20d'essais%20-%20Perdue%20_Le%20nombre%20myst%C3%A8re.gif" alt="Perdue" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Jeu d'essai — Perdue</div></div>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p class="project-desc">Un jeu Java pour deux joueurs doit être développé. Le premier joueur choisit un nombre secret entre 1 et 100, et le second dispose de 10 essais pour le deviner. Après chaque proposition, le programme indique si le nombre est « Trop haut ! », « Trop bas ! » ou « Gagné ». En cas de réussite, le nombre de tentatives utilisées est affiché. Le jeu doit comporter des contrôles tout au long de la partie, des messages clairs, une présentation soignée, un code bien commenté et des noms de variables clairs et bien choisis.</p>
+                    <div class="project-meta"><div><span class="tag">Java</span><span class="tag">Eclipse IDE</span></div><a class="project-link" href="https://maxtro-code.github.io/portfolio/projects/Professionnel/BTS%20SIO/D.M.%20d'Algo.%20-%20Programmation_Le%20nombre%20myst%C3%A9rieux.pdf" target="_blank">📄 Télécharger la documentation</a></div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-left"><div class="project-icon">🔡</div><div><div class="project-title">Le Mot à Trouver & La Calculatrice</div><div class="project-sub">Java · HTML, CSS, JavaScript · Eclipse IDE</div></div></div>
+                    <button class="media-toggle" onclick="toggleMedia(this,'media-mot')">▶ Voir les captures</button>
+                </div>
+                <div class="project-media" id="media-mot">
+                    <div class="media-grid">
+                        <div><img src="https://maxtro-code.github.io/portfolio/projects/Professionnel/BTS%20SIO/Jeu%20d'essai%20_Le%20mot%20%C3%A0%20trouver%20.png" alt="Le mot à trouver" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Le mot à trouver — Jeu d'essai</div></div>
+                        <div><img src="https://maxtro-code.github.io/portfolio/projects/Professionnel/BTS%20SIO/Test-calculatrice.gif" alt="Calculatrice" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Calculatrice — Jeu d'essai</div></div>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p class="project-desc"><strong>Le mot à trouver :</strong> L'objectif de ce devoir est de développer en Java un jeu dans lequel un joueur doit deviner un mot saisi par un autre utilisateur, en un nombre limité d'essais, en obtenant des indications sur les lettres communes et bien placées à chaque tentative.</p>
+                    <p class="project-desc" style="margin-top:.6rem"><strong>La calculatrice :</strong> L'objectif de ce projet est de développer une calculatrice graphique en JavaScript permettant d'effectuer des opérations mathématiques en cascade sur des entiers avec une interface simple et intuitive.</p>
+                    <div class="project-meta"><div><span class="tag">Java</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div></div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-left"><div class="project-icon">🗺️</div><div><div class="project-title">Distance intervilles, Tri par sélection & Tri par propagation</div><div class="project-sub">Java · Eclipse IDE</div></div></div>
+                    <button class="media-toggle" onclick="toggleMedia(this,'media-tris')">▶ Voir les captures</button>
+                </div>
+                <div class="project-media" id="media-tris">
+                    <div class="media-grid">
+                        <div><img src="https://maxtro-code.github.io/portfolio/projects/Professionnel/BTS%20SIO/Jeu%20d'essai%20-%20Distance%20Intervilles.png" alt="Distance intervilles" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Distance intervilles — Jeu d'essai</div></div>
+                        <div><img src="https://maxtro-code.github.io/portfolio/projects/Professionnel/BTS%20SIO/Jeu%20d'essai%20-%20Tri%20par%20s%C3%A9lection.png" alt="Tri par sélection" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Tri par sélection — Jeu d'essai</div></div>
+                        <div><img src="https://maxtro-code.github.io/portfolio/projects/Professionnel/BTS%20SIO/Jeu%20d'essai%20-%20Tri%20par%20propagation.png" alt="Tri par propagation" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Tri par propagation — Jeu d'essai</div></div>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p class="project-desc"><strong>Distance intervilles :</strong> Le programme doit offrir une interface interactive où l'utilisateur peut saisir des paires de villes et obtenir instantanément la distance qui les sépare, avec la possibilité de renouveler la requête autant de fois que nécessaire, tout en garantissant la validité des villes saisies.</p>
+                    <p class="project-desc" style="margin-top:.6rem"><strong>Tri par sélection :</strong> Un algorithme de tri simple et intuitif qui fonctionne en divisant le tableau en deux parties : une partie triée et une partie non triée. L'algorithme recherche systématiquement le plus petit élément dans la partie non triée et le place à la position correcte dans la partie triée.</p>
+                    <p class="project-desc" style="margin-top:.6rem"><strong>Tri par propagation :</strong> Le tri par propagation (ou tri bulle) est un algorithme simple qui trie un tableau en comparant et échangeant les éléments adjacents de la gauche vers la droite, plusieurs fois jusqu'à ce que le tableau soit entièrement trié.</p>
+                    <div class="project-meta"><div><span class="tag">Java</span><span class="tag">Algorithmes</span><span class="tag">Eclipse IDE</span></div><a class="project-link" href="https://maxtro-code.github.io/portfolio/projects/Professionnel/BTS%20SIO/D.M.%20-%20Distance%20intervilles%20%20-%20Tri%20parss%C3%A9lection%20%26%20propagation.pdf" target="_blank">📄 Télécharger la documentation</a></div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header"><div class="project-left"><div class="project-icon">❓</div><div><div class="project-title">Guess What</div><div class="project-sub">PHP · GitLab</div></div></div></div>
+                <div class="project-body">
+                    <p class="project-desc">La description est dans le README.adoc.</p>
+                    <div class="project-meta"><div><span class="tag">PHP</span><span class="tag">GitLab</span></div><a class="project-link" href="https://gitlab.com/m.russonprinci/guesswhat-maxime-russon" target="_blank">🔗 Lien vers le projet</a></div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header"><div class="project-left"><div class="project-icon">🏢</div><div><div class="project-title">Gregocity</div><div class="project-sub">Architecture réseau</div></div></div></div>
+                <div class="project-body">
+                    <p class="project-desc">Un dossier d'architecture de l'infrastructure réseau permettant à l'entreprise (Gregocity) d'avoir un réseau informatique opérationnel dans ses nouveaux locaux.</p>
+                    <div class="project-meta"><div><span class="tag">Réseau</span><span class="tag">Infrastructure</span></div><a class="project-link" href="https://maxtro-code.github.io/portfolio/projects/Professionnel/BTS%20SIO/Gregocity.zip">📦 Télécharger fichier Zip</a></div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-left"><div class="project-icon">🍽️</div><div><div class="project-title">Cantine ENC Bessières</div><div class="project-sub">Laravel 11 · Blade · Tailwind CSS · MySQL · BTS SIO 2026</div></div></div>
+                    <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
+                        <button class="media-toggle" onclick="toggleMedia(this,'media-cantine')">▶ Voir le visuel</button>
+                        <a class="project-link" href="https://github.com/Maxtro-code/cantineenc" target="_blank">🔗 GitHub</a>
+                    </div>
+                </div>
+                <div class="project-media" id="media-cantine">
+                    <div class="media-grid">
+                        <div><img src="/projects/Professionnel/BTS SIO/Formulaire d'enregistrement.png" alt="Dashboard des réservations à venir" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Formulaire d'enregistrement</div></div>
+                        <div><img src="/projects/Professionnel/BTS SIO/visuel-accueil.png" alt="Menu hebdomadaire" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Acceuil site reservation</div></div>
+                        <div><img src="/projects/Professionnel/BTS SIO/visuel-menu.png" alt="Menu hebdomadaire" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Menu cantine ENC</div></div>
+                       <div><img src="/projects/Professionnel/BTS SIO/visuel-reservation.png" alt="Menu hebdomadaire" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Reservations</div></div>
+                       <div><img src="/projects/Professionnel/BTS SIO/visuel-gestion_utilisateurs.png" alt="Menu hebdomadaire" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Gestion des utilisateurs</div></div>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p class="project-desc">Application web de gestion de la restauration scolaire à l'ENC Bessières (Paris 17e). Remplace un système legacy vulnérable (mots de passe en clair, sessions non sécurisées). Authentification bcrypt via Laravel Jetstream, tableau de bord des réservations à venir, consultation du menu hebdomadaire, réservation et annulation de repas (lundi–vendredi), panneau d'administration des comptes et des rôles.</p>
+                    <div class="project-meta">
+                        <div><span class="tag">Laravel 11</span><span class="tag">PHP</span><span class="tag">Blade</span><span class="tag">Tailwind CSS</span><span class="tag">Alpine.js</span><span class="tag">MySQL</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-left"><div class="project-icon">🕹️</div><div><div class="project-title">GameSwap</div><div class="project-sub">Vue.js 3 · Node.js · Express · MySQL · BTS SIO 2026</div></div></div>
+                    <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
+                        <button class="media-toggle" onclick="toggleMedia(this,'media-gameswap')">▶ Voir le visuel</button>
+                        <a class="project-link" href="https://github.com/Maxtro-code/gameswap" target="_blank">🔗 GitHub</a>
+                    </div>
+                </div>
+                    <div class="project-media" id="media-gameswap">
+                    <div class="media-grid">
+                        <div><img src="/projects/Professionnel/BTS SIO/visuel-accueil_sans être connecter.png" alt="Dashboard des réservations à venir" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Formulaire d'enregistrement</div></div>
+                        <div><img src="/projects/Professionnel/BTS SIO/visuel-ajout jeux à ca collection.png" alt="Menu hebdomadaire" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Acceuil site reservation</div></div>
+                        <div><img src="/projects/Professionnel/BTS SIO/visuel-collection.png" alt="Menu hebdomadaire" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Menu cantine ENC</div></div>
+                       <div><img src="/projects/Professionnel/BTS SIO/visuel-échanges.png" alt="Menu hebdomadaire" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Reservations</div></div>
+                       <div><img src="/projects/Professionnel/BTS SIO/visuel-formulaire_login.png" alt="Menu hebdomadaire" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Gestion des utilisateurs</div></div>
+                       <div><img src="/projects/Professionnel/BTS SIO/visuel-formulaire_register.png" alt="Menu hebdomadaire" loading="lazy" onclick="openLightbox(this.src,this.alt)"/><div class="media-caption">Gestion des utilisateurs</div></div>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p class="project-desc">Plateforme d'échange de jeux vidéo entre particuliers. Recherche de jeux via l'API RAWG.io (couvertures, plateformes et notes récupérées automatiquement), gestion de collection personnelle, envoi de demandes d'échange personnalisées et suivi du statut (en attente, accepté, refusé). Authentification sécurisée avec express-session et bcrypt.</p>
+                    <div class="project-meta">
+                        <div><span class="tag">Vue.js 3</span><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">MySQL</span><span class="tag">Bulma CSS</span><span class="tag">Vite 5</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════ 06 · SYNTHÈSE ══════════════════════ -->
+    <section id="synthese">
+        <p class="section-eyebrow">// 06 — TABLEAU DE SYNTHÈSE</p>
+        <iframe src="Mathis Coco - BTS SIO - Annexe 8-1 - Tableau de synthèse - Epreuve E4 - BTS SIO 2026.pdf" width="100%" height="600px" style="border: none;">
+        </iframe>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════ 07 · VEILLE ══════════════════════ -->
+    <section id="veille">
+        <p class="section-eyebrow">// 07 — VEILLE TECHNOLOGIQUE</p>
+        <h2 class="stitle">IA &amp; Jeux Vidéo<br/>Veille 2024 — 2026</h2>
+
+        <div class="veille-frise">
+
+            <!-- ── 2024 ── -->
+            <div class="veille-year-block">
+                <div class="veille-year-label">2024</div>
+                <div class="veille-events">
+
+                    <div class="veille-event">
+                        <div class="veille-event-type">ARTICLE · UNIVERSITÉ</div>
+                        <div class="veille-event-title">IA dans le développement de jeux vidéo : des PNJ intelligents aux mondes procéduraux</div>
+                        <div class="veille-event-desc">Capitol Technology University explore comment l'IA révolutionne les PNJ (personnages non-joueurs) grâce au NLP : ils génèrent désormais des dialogues dynamiques au lieu de réponses scriptées, et s'adaptent au comportement du joueur en temps réel.</div>
+                        <a href="https://www.captechu.edu/blog/ai-in-video-game-development" target="_blank">→ Lire l'article (captechu.edu)</a>
+                    </div>
+
+                    <div class="veille-event">
+                        <div class="veille-event-type">ARTICLE · INDUSTRIE — EA SEED</div>
+                        <div class="veille-event-title">SEED applique le Machine Learning aux tests de jeux AAA</div>
+                        <div class="veille-event-desc">Le laboratoire de recherche d'Electronic Arts (SEED) utilise l'apprentissage par imitation et le deep reinforcement learning pour automatiser les tests QA. Résultat sur Battlefield 2042 : −39 % de temps de navigation pour les véhicules IA, et découverte d'exploits invisibles aux testeurs humains.</div>
+                        <a href="https://www.ea.com/seed/news/seed-ml-research-aaa-game-testing" target="_blank">→ Lire l'article (ea.com/seed)</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ── 2025 ── -->
+            <div class="veille-year-block">
+                <div class="veille-year-label">2025</div>
+                <div class="veille-events">
+
+                    <div class="veille-event">
+                        <div class="veille-event-type">ARTICLE · ANALYSE TECHNIQUE</div>
+                        <div class="veille-event-title">Génération procédurale et narration par IA en 2025</div>
+                        <div class="veille-event-desc">Cosmic Meta analyse comment les réseaux de neurones génératifs permettent de créer des niveaux entiers, des écosystèmes et des quêtes qui s'adaptent au profil émotionnel du joueur. No Man's Sky et Fortnite sont cités comme exemples de mondes évolutifs pilotés par IA.</div>
+                        <a href="https://cosmicmeta.io/2025/02/13/ai-in-game-development-procedural-generation-and-storytelling-in-2025/" target="_blank">→ Lire l'article (cosmicmeta.io)</a>
+                    </div>
+
+                    <div class="veille-event">
+                        <div class="veille-event-type">ARTICLE · IA GÉNÉRATIVE</div>
+                        <div class="veille-event-title">Comment l'IA générative transforme le développement de jeux en 2025</div>
+                        <div class="veille-event-desc">Ixie Gaming détaille l'impact de l'IA générative sur la production : génération de textures, dialogues de PNJ, musiques adaptatives et prototypage rapide. Plus de 50 % des studios utilisent désormais des outils d'IA générative selon le rapport GDC 2025.</div>
+                        <a href="https://www.ixiegaming.com/blog/ai-isnt-just-for-npcs/" target="_blank">→ Lire l'article (ixiegaming.com)</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ── 2026 ── -->
+            <div class="veille-year-block">
+                <div class="veille-year-label">2026</div>
+                <div class="veille-events">
+
+                    <div class="veille-event">
+                        <div class="veille-event-type">ARTICLE · PROSPECTIVE</div>
+                        <div class="veille-event-title">L'IA transforme le jeu vidéo en 2026 : des PNJ aux mondes entièrement générés</div>
+                        <div class="veille-event-desc">TheGWW dresse un état des lieux 2026 : les mondes ouverts générés intégralement par IA commencent à dépasser les approches hybrides. L'IA EA Sports FC 26 intègre du reinforcement learning pour un comportement de gardien de but plus humain, marquant un tournant dans la simulation sportive.</div>
+                        <a href="https://thegww.com/how-ai-is-transforming-game-development-in-2026-from-npcs-to-fully-generated-worlds/" target="_blank">→ Lire l'article (thegww.com)</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div><!-- /.veille-frise -->
+
+        <!-- Outils & technologies suivis -->
+        <div class="veille-tools">
+            <h3>Outils &amp; technologies suivis</h3>
+            <div class="tools-grid">
+                <div class="tools-col">
+                    <h4>IA / Machine Learning</h4>
+                    <ul>
+                        <li>Deep Reinforcement Learning (DRL)</li>
+                        <li>Imitation Learning</li>
+                        <li>Natural Language Processing (NLP)</li>
+                        <li>Réseaux de neurones génératifs</li>
+                        <li>Génération procédurale assistée</li>
+                    </ul>
+                </div>
+                <div class="tools-col">
+                    <h4>Outils &amp; moteurs</h4>
+                    <ul>
+                        <li>Unreal Engine 5 (Nanite, Lumen)</li>
+                        <li>Unity ML-Agents</li>
+                        <li>EA SEED Research Framework</li>
+                        <li>GPT-4 / LLM pour dialogues PNJ</li>
+                        <li>Midjourney / Stable Diffusion (assets)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════ 08 · CONTACT ══════════════════════ -->
+    <section id="contact">
+        <p class="section-eyebrow">// 08 — CONTACT</p>
+        <h2 class="stitle" style="text-align:center">Me contacter</h2>
+        <div class="contact-box">
+            <!-- Formspree : créez un compte sur formspree.io et remplacez VOTRE_ID -->
+            <form class="contact-form" action="https://formspree.io/f/xkokgeoa" method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="fc-name">// NOM</label>
+                    <input class="form-input" type="text" id="fc-name" name="name" placeholder="Votre nom" required/>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="fc-email">// E-MAIL</label>
+                    <input class="form-input" type="email" id="fc-email" name="email" placeholder="votre@email.com" required/>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="fc-subject">// SUJET</label>
+                    <input class="form-input" type="text" id="fc-subject" name="subject" placeholder="Objet du message"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="fc-msg">// MESSAGE</label>
+                    <textarea class="form-input" id="fc-msg" name="message" placeholder="Votre message..." rows="5" required></textarea>
+                </div>
+                <button class="form-submit" type="submit">Envoyer →</button>
+            </form>
+            <div class="contact-socials">
+                <a class="c-link" href="https://github.com/maxtro-code" target="_blank"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>Mathis C. alias Maxtro-code</a>
+                <a class="c-link" href="https://www.linkedin.com/in/mathiscoco2/" target="_blank"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>Mathis COCO</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>© 2025 — <span>MATHIS COCO</span> · BTS SIO SLAM · Tous droits réservés</footer>
+</div>
+
+<!-- ══════════════════════ LIGHTBOX IMAGE ══════════════════════ -->
+<div class="lb-overlay" id="lbOverlay" onclick="closeLightbox()">
+    <span class="lb-close" onclick="closeLightbox()">✕</span>
+    <img id="lbImg" src="" alt=""/>
+</div>
+
+<!-- ══════════════════════ MODAL CV ══════════════════════ -->
+<div class="cv-overlay" id="cvOverlay" onclick="handleCvOverlayClick(event)">
+    <div class="cv-modal" id="cvModal">
+        <div class="cv-modal-header">
+            <div class="cv-modal-title">
+                <span id="cvModalTitle">MON CURRICULUM VITÆ</span>
+                <span id="cvModalSubtitle">// MATHIS COCO · BTS SIO SLAM · 2025</span>
+            </div>
+            <div class="cv-modal-actions">
+                <a class="cv-dl-btn" id="cvDlBtn" href="cv/CV%20-%20Mathis%20COCO.pdf" download>⬇ Télécharger</a>
+                <button class="cv-close-btn" onclick="closeCvModal()" aria-label="Fermer">✕</button>
+            </div>
+        </div>
+        <div class="cv-modal-body">
+            <iframe id="cvFrame" src="" title="CV Mathis COCO"></iframe>
+        </div>
+        <div class="cv-modal-footer">PRESS ESC TO CLOSE · © 2025 MATHIS COCO</div>
+    </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
